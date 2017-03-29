@@ -11,10 +11,10 @@ var audioInput = null,
     dryGain = null,
     outputMix = null,
     currentEffectNode = null,
-    reverbBuffer = null, // ?
+    // reverbBuffer = null, 
     dtime = null,
     dregen = null,
-    lfo = null,
+    // lfo = null,
     cspeed = null,
     cdelay = null,
     cdepth = null,
@@ -38,9 +38,9 @@ var audioInput = null,
     mddelay = null,
     mddepth = null,
     mdspeed = null,
-    lplfo = null,
-    lplfodepth = null,
-    lplfofilter = null,
+    // lplfo = null,
+    // lplfodepth = null,
+    // lplfofilter = null,
     awFollower = null,
     awDepth = null,
     awFilter = null,
@@ -95,7 +95,6 @@ function createLPInputFilter() {
     lpInputFilter.frequency.value = 2048;
     return lpInputFilter;
 }
-
 
 // function toggleMono() {
 //     if (audioInput != realAudioInput) {
@@ -192,7 +191,9 @@ function initAudio() {
     irRRequest.responseType = "arraybuffer";
     irRRequest.onload = function() {
         audioContext.decodeAudioData( irRRequest.response, 
-            function(buffer) { reverbBuffer = buffer; } );
+            function(buffer) { 
+                // reverbBuffer = buffer; 
+            } );
     }
     irRRequest.send();
 
@@ -267,7 +268,7 @@ function crossfade(value) {
 var lastEffect = -1;
 
 function changeEffect() {
-    lfo = null;
+    // lfo = null;
     dtime = null;
     dregen = null;
     cspeed = null;
@@ -294,9 +295,9 @@ function changeEffect() {
     mddelay = null;
     mddepth = null;
     mdspeed = null;
-    lplfo = null;
-    lplfodepth = null;
-    lplfofilter = null;
+    // lplfo = null;
+    // lplfodepth = null;
+    // lplfofilter = null;
     awFollower = null;
     awDepth = null;
     awFilter = null;
