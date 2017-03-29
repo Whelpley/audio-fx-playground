@@ -1,5 +1,8 @@
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext = new AudioContext();
+
+// TODO: do not have to declare Null at start
+// Is this the right place to declare all these Var's?
 var audioInput = null,
     realAudioInput = null,
     effectInput = null,
@@ -313,83 +316,83 @@ function changeEffect() {
         case 0: // Delay
             currentEffectNode = createDelay();
             break;
-        case 1: // Reverb
-            currentEffectNode = createReverb();
-            break;
-        case 2: // Distortion
-            currentEffectNode = createDistortion();
-            break;
-        case 3: // Telephone
-            currentEffectNode = createTelephonizer();
-            break;
-        case 4: // GainLFO
-            currentEffectNode = createGainLFO();
-            break;
-        case 5: // Chorus
-            currentEffectNode = createChorus();
-            break;
-        case 6: // Flange
-            currentEffectNode = createFlange();
-            break;
-        case 7: // Ringmod
-            currentEffectNode = createRingmod();
-            break;
-        case 8: // Stereo Chorus
-            currentEffectNode = createStereoChorus();
-            break;
-        case 9: // Stereo Flange
-            currentEffectNode = createStereoFlange();
-            break;
-        case 10: // Pitch shifting
-            currentEffectNode = createPitchShifter();
-            break;
-        case 11: // Mod Delay 
-            currentEffectNode = createModDelay();
-            break;
-        case 12: // Ping-pong delay
-            var pingPong = createPingPongDelay(audioContext, (audioInput == realAudioInput), 0.3, 0.4 );
-            pingPong.output.connect( wetGain );
-            currentEffectNode = pingPong.input;
-            break;
-        case 13: // LPF LFO
-            currentEffectNode = createFilterLFO();
-            break;
-        case 14: // Envelope Follower
-            currentEffectNode = createEnvelopeFollower();
-            break;
-        case 15: // Autowah
-            currentEffectNode = createAutowah();
-            break;
-        case 16: // Noise gate
-            currentEffectNode = createNoiseGate();
-            break;
-        case 17: // Wah Bass
-            var pingPong = createPingPongDelay(audioContext, (audioInput == realAudioInput), 0.5, 0.5 );
-            pingPong.output.connect( wetGain );
-            pingPong.input.connect(wetGain);
-            var tempWetGain = wetGain;
-            wetGain = pingPong.input;
-            wetGain = createAutowah();
-            currentEffectNode = createPitchShifter();
-            wetGain = tempWetGain;
-            break;
-        case 18: // Distorted Wah Chorus
-            var tempWetGain = wetGain;
-            wetGain = createStereoChorus();
-            wetGain = createDistortion();
-            currentEffectNode = createAutowah();
-            wetGain = tempWetGain;
-            waveshaper.setDrive(20);
-            break;
-        case 19: // Vibrato
-            currentEffectNode = createVibrato();
-            break;
-        case 20: // BitCrusher
-            currentEffectNode = createBitCrusher();
-            break;
-        case 21: // Apollo effect
-            currentEffectNode = createApolloEffect();
-            break;
+        // case 1: // Reverb
+        //     currentEffectNode = createReverb();
+        //     break;
+        // case 2: // Distortion
+        //     currentEffectNode = createDistortion();
+        //     break;
+        // case 3: // Telephone
+        //     currentEffectNode = createTelephonizer();
+        //     break;
+        // case 4: // GainLFO
+        //     currentEffectNode = createGainLFO();
+        //     break;
+        // case 5: // Chorus
+        //     currentEffectNode = createChorus();
+        //     break;
+        // case 6: // Flange
+        //     currentEffectNode = createFlange();
+        //     break;
+        // case 7: // Ringmod
+        //     currentEffectNode = createRingmod();
+        //     break;
+        // case 8: // Stereo Chorus
+        //     currentEffectNode = createStereoChorus();
+        //     break;
+        // case 9: // Stereo Flange
+        //     currentEffectNode = createStereoFlange();
+        //     break;
+        // case 10: // Pitch shifting
+        //     currentEffectNode = createPitchShifter();
+        //     break;
+        // case 11: // Mod Delay 
+        //     currentEffectNode = createModDelay();
+        //     break;
+        // case 12: // Ping-pong delay
+        //     var pingPong = createPingPongDelay(audioContext, (audioInput == realAudioInput), 0.3, 0.4 );
+        //     pingPong.output.connect( wetGain );
+        //     currentEffectNode = pingPong.input;
+        //     break;
+        // case 13: // LPF LFO
+        //     currentEffectNode = createFilterLFO();
+        //     break;
+        // case 14: // Envelope Follower
+        //     currentEffectNode = createEnvelopeFollower();
+        //     break;
+        // case 15: // Autowah
+        //     currentEffectNode = createAutowah();
+        //     break;
+        // case 16: // Noise gate
+        //     currentEffectNode = createNoiseGate();
+        //     break;
+        // case 17: // Wah Bass
+        //     var pingPong = createPingPongDelay(audioContext, (audioInput == realAudioInput), 0.5, 0.5 );
+        //     pingPong.output.connect( wetGain );
+        //     pingPong.input.connect(wetGain);
+        //     var tempWetGain = wetGain;
+        //     wetGain = pingPong.input;
+        //     wetGain = createAutowah();
+        //     currentEffectNode = createPitchShifter();
+        //     wetGain = tempWetGain;
+        //     break;
+        // case 18: // Distorted Wah Chorus
+        //     var tempWetGain = wetGain;
+        //     wetGain = createStereoChorus();
+        //     wetGain = createDistortion();
+        //     currentEffectNode = createAutowah();
+        //     wetGain = tempWetGain;
+        //     waveshaper.setDrive(20);
+        //     break;
+        // case 19: // Vibrato
+        //     currentEffectNode = createVibrato();
+        //     break;
+        // case 20: // BitCrusher
+        //     currentEffectNode = createBitCrusher();
+        //     break;
+        // case 21: // Apollo effect
+        //     currentEffectNode = createApolloEffect();
+        //     break;
         default:
             break;
     }
@@ -399,27 +402,27 @@ function changeEffect() {
 
 
 
-function createTelephonizer() {
-    // I double up the filters to get a 4th-order filter = faster fall-off
-    var lpf1 = audioContext.createBiquadFilter();
-    lpf1.type = "lowpass";
-    lpf1.frequency.value = 2000.0;
-    var lpf2 = audioContext.createBiquadFilter();
-    lpf2.type = "lowpass";
-    lpf2.frequency.value = 2000.0;
-    var hpf1 = audioContext.createBiquadFilter();
-    hpf1.type = "highpass";
-    hpf1.frequency.value = 500.0;
-    var hpf2 = audioContext.createBiquadFilter();
-    hpf2.type = "highpass";
-    hpf2.frequency.value = 500.0;
-    lpf1.connect( lpf2 );
-    lpf2.connect( hpf1 );
-    hpf1.connect( hpf2 );
-    hpf2.connect( wetGain );
-    currentEffectNode = lpf1;
-    return( lpf1 );
-}
+// function createTelephonizer() {
+//     // I double up the filters to get a 4th-order filter = faster fall-off
+//     var lpf1 = audioContext.createBiquadFilter();
+//     lpf1.type = "lowpass";
+//     lpf1.frequency.value = 2000.0;
+//     var lpf2 = audioContext.createBiquadFilter();
+//     lpf2.type = "lowpass";
+//     lpf2.frequency.value = 2000.0;
+//     var hpf1 = audioContext.createBiquadFilter();
+//     hpf1.type = "highpass";
+//     hpf1.frequency.value = 500.0;
+//     var hpf2 = audioContext.createBiquadFilter();
+//     hpf2.type = "highpass";
+//     hpf2.frequency.value = 500.0;
+//     lpf1.connect( lpf2 );
+//     lpf2.connect( hpf1 );
+//     hpf1.connect( hpf2 );
+//     hpf2.connect( wetGain );
+//     currentEffectNode = lpf1;
+//     return( lpf1 );
+// }
 
 function createDelay() {
     var delayNode = audioContext.createDelay();
@@ -438,12 +441,12 @@ function createDelay() {
     return delayNode;
 }
 
-function createReverb() {
-    var convolver = audioContext.createConvolver();
-    convolver.buffer = reverbBuffer; // impulseResponse( 2.5, 2.0 );  // reverbBuffer;
-    convolver.connect( wetGain );
-    return convolver;
-}
+// function createReverb() {
+//     var convolver = audioContext.createConvolver();
+//     convolver.buffer = reverbBuffer; // impulseResponse( 2.5, 2.0 );  // reverbBuffer;
+//     convolver.connect( wetGain );
+//     return convolver;
+// }
 
 var waveshaper = null;
 
@@ -508,156 +511,156 @@ function createFilterLFO() {
     return filter;
 }
 
-function createRingmod() {
-    var gain = audioContext.createGain();
-    var ring = audioContext.createGain();
-    var osc = audioContext.createOscillator();
+// function createRingmod() {
+//     var gain = audioContext.createGain();
+//     var ring = audioContext.createGain();
+//     var osc = audioContext.createOscillator();
 
-    osc.type = 'sine';
-    rmod = osc;
-    osc.frequency.value = Math.pow( 2, parseFloat( document.getElementById("rmfreq").value ) );
-    osc.connect(ring.gain);
+//     osc.type = 'sine';
+//     rmod = osc;
+//     osc.frequency.value = Math.pow( 2, parseFloat( document.getElementById("rmfreq").value ) );
+//     osc.connect(ring.gain);
 
-    ring.gain.value = 0.0;
-    gain.connect(ring);
-    ring.connect(wetGain);
-    osc.start(0);
-    return gain;
-}
+//     ring.gain.value = 0.0;
+//     gain.connect(ring);
+//     ring.connect(wetGain);
+//     osc.start(0);
+//     return gain;
+// }
 
 var awg = null;
 
-function createChorus() {
-    var delayNode = audioContext.createDelay();
-    delayNode.delayTime.value = parseFloat( document.getElementById("cdelay").value );
-    cdelay = delayNode;
+// function createChorus() {
+//     var delayNode = audioContext.createDelay();
+//     delayNode.delayTime.value = parseFloat( document.getElementById("cdelay").value );
+//     cdelay = delayNode;
 
-    var inputNode = audioContext.createGain();
+//     var inputNode = audioContext.createGain();
 
-    var osc = audioContext.createOscillator();
-    var gain = audioContext.createGain();
+//     var osc = audioContext.createOscillator();
+//     var gain = audioContext.createGain();
 
-    gain.gain.value = parseFloat( document.getElementById("cdepth").value ); // depth of change to the delay:
-    cdepth = gain;
+//     gain.gain.value = parseFloat( document.getElementById("cdepth").value ); // depth of change to the delay:
+//     cdepth = gain;
 
-    osc.type = 'sine';
-    osc.frequency.value = parseFloat( document.getElementById("cspeed").value );
-    cspeed = osc;
+//     osc.type = 'sine';
+//     osc.frequency.value = parseFloat( document.getElementById("cspeed").value );
+//     cspeed = osc;
 
-    osc.connect(gain);
-    gain.connect(delayNode.delayTime);
+//     osc.connect(gain);
+//     gain.connect(delayNode.delayTime);
 
-    inputNode.connect( wetGain );
-    inputNode.connect( delayNode );
-    delayNode.connect( wetGain );
+//     inputNode.connect( wetGain );
+//     inputNode.connect( delayNode );
+//     delayNode.connect( wetGain );
 
 
-    osc.start(0);
+//     osc.start(0);
 
-    return inputNode;
-}
+//     return inputNode;
+// }
 
-function createVibrato() {
-    var delayNode = audioContext.createDelay();
-    delayNode.delayTime.value = parseFloat( document.getElementById("vdelay").value );
-    cdelay = delayNode;
+// function createVibrato() {
+//     var delayNode = audioContext.createDelay();
+//     delayNode.delayTime.value = parseFloat( document.getElementById("vdelay").value );
+//     cdelay = delayNode;
 
-    var inputNode = audioContext.createGain();
+//     var inputNode = audioContext.createGain();
 
-    var osc = audioContext.createOscillator();
-    var gain = audioContext.createGain();
+//     var osc = audioContext.createOscillator();
+//     var gain = audioContext.createGain();
 
-    gain.gain.value = parseFloat( document.getElementById("vdepth").value ); // depth of change to the delay:
-    cdepth = gain;
+//     gain.gain.value = parseFloat( document.getElementById("vdepth").value ); // depth of change to the delay:
+//     cdepth = gain;
 
-    osc.type = 'sine';
-    osc.frequency.value = parseFloat( document.getElementById("vspeed").value );
-    cspeed = osc;
+//     osc.type = 'sine';
+//     osc.frequency.value = parseFloat( document.getElementById("vspeed").value );
+//     cspeed = osc;
 
-    osc.connect(gain);
-    gain.connect(delayNode.delayTime);
-    inputNode.connect( delayNode );
-    delayNode.connect( wetGain );
-    osc.start(0);
+//     osc.connect(gain);
+//     gain.connect(delayNode.delayTime);
+//     inputNode.connect( delayNode );
+//     delayNode.connect( wetGain );
+//     osc.start(0);
 
-    return inputNode;
-}
+//     return inputNode;
+// }
 
-function createFlange() {
-    var delayNode = audioContext.createDelay();
-    delayNode.delayTime.value = parseFloat( document.getElementById("fldelay").value );
-    fldelay = delayNode;
+// function createFlange() {
+//     var delayNode = audioContext.createDelay();
+//     delayNode.delayTime.value = parseFloat( document.getElementById("fldelay").value );
+//     fldelay = delayNode;
 
-    var inputNode = audioContext.createGain();
-    var feedback = audioContext.createGain();
-    var osc = audioContext.createOscillator();
-    var gain = audioContext.createGain();
-    gain.gain.value = parseFloat( document.getElementById("fldepth").value );
-    fldepth = gain;
+//     var inputNode = audioContext.createGain();
+//     var feedback = audioContext.createGain();
+//     var osc = audioContext.createOscillator();
+//     var gain = audioContext.createGain();
+//     gain.gain.value = parseFloat( document.getElementById("fldepth").value );
+//     fldepth = gain;
 
-    feedback.gain.value = parseFloat( document.getElementById("flfb").value );
-    flfb = feedback;
+//     feedback.gain.value = parseFloat( document.getElementById("flfb").value );
+//     flfb = feedback;
 
-    osc.type = 'sine';
-    osc.frequency.value = parseFloat( document.getElementById("flspeed").value );
-    flspeed = osc;
+//     osc.type = 'sine';
+//     osc.frequency.value = parseFloat( document.getElementById("flspeed").value );
+//     flspeed = osc;
 
-    osc.connect(gain);
-    gain.connect(delayNode.delayTime);
+//     osc.connect(gain);
+//     gain.connect(delayNode.delayTime);
 
-    inputNode.connect( wetGain );
-    inputNode.connect( delayNode );
-    delayNode.connect( wetGain );
-    delayNode.connect( feedback );
-    feedback.connect( inputNode );
+//     inputNode.connect( wetGain );
+//     inputNode.connect( delayNode );
+//     delayNode.connect( wetGain );
+//     delayNode.connect( feedback );
+//     feedback.connect( inputNode );
 
-    osc.start(0);
+//     osc.start(0);
 
-    return inputNode;
-}
+//     return inputNode;
+// }
 
-function createStereoChorus() {
-    var splitter = audioContext.createChannelSplitter(2);
-    var merger = audioContext.createChannelMerger(2);
-    var inputNode = audioContext.createGain();
+// function createStereoChorus() {
+//     var splitter = audioContext.createChannelSplitter(2);
+//     var merger = audioContext.createChannelMerger(2);
+//     var inputNode = audioContext.createGain();
 
-    inputNode.connect( splitter );
-    inputNode.connect( wetGain );
+//     inputNode.connect( splitter );
+//     inputNode.connect( wetGain );
 
-    var delayLNode = audioContext.createDelay();
-    var delayRNode = audioContext.createDelay();
-    delayLNode.delayTime.value = parseFloat( document.getElementById("scdelay").value );
-    delayRNode.delayTime.value = parseFloat( document.getElementById("scdelay").value );
-    scldelay = delayLNode;
-    scrdelay = delayRNode;
-    splitter.connect( delayLNode, 0 );
-    splitter.connect( delayRNode, 1 );
+//     var delayLNode = audioContext.createDelay();
+//     var delayRNode = audioContext.createDelay();
+//     delayLNode.delayTime.value = parseFloat( document.getElementById("scdelay").value );
+//     delayRNode.delayTime.value = parseFloat( document.getElementById("scdelay").value );
+//     scldelay = delayLNode;
+//     scrdelay = delayRNode;
+//     splitter.connect( delayLNode, 0 );
+//     splitter.connect( delayRNode, 1 );
 
-    var osc = audioContext.createOscillator();
-    scldepth = audioContext.createGain();
-    scrdepth = audioContext.createGain();
+//     var osc = audioContext.createOscillator();
+//     scldepth = audioContext.createGain();
+//     scrdepth = audioContext.createGain();
 
-    scldepth.gain.value = parseFloat( document.getElementById("scdepth").value ); // depth of change to the delay:
-    scrdepth.gain.value = - parseFloat( document.getElementById("scdepth").value ); // depth of change to the delay:
+//     scldepth.gain.value = parseFloat( document.getElementById("scdepth").value ); // depth of change to the delay:
+//     scrdepth.gain.value = - parseFloat( document.getElementById("scdepth").value ); // depth of change to the delay:
 
-    osc.type = 'triangle';
-    osc.frequency.value = parseFloat( document.getElementById("scspeed").value );
-    scspeed = osc;
+//     osc.type = 'triangle';
+//     osc.frequency.value = parseFloat( document.getElementById("scspeed").value );
+//     scspeed = osc;
 
-    osc.connect(scldepth);
-    osc.connect(scrdepth);
+//     osc.connect(scldepth);
+//     osc.connect(scrdepth);
 
-    scldepth.connect(delayLNode.delayTime);
-    scrdepth.connect(delayRNode.delayTime);
+//     scldepth.connect(delayLNode.delayTime);
+//     scrdepth.connect(delayRNode.delayTime);
 
-    delayLNode.connect( merger, 0, 0 );
-    delayRNode.connect( merger, 0, 1 );
-    merger.connect( wetGain );
+//     delayLNode.connect( merger, 0, 0 );
+//     delayRNode.connect( merger, 0, 1 );
+//     merger.connect( wetGain );
 
-    osc.start(0);
+//     osc.start(0);
 
-    return inputNode;
-}
+//     return inputNode;
+// }
 
 /*
     Add modulation to delayed signal akin to ElectroHarmonix MemoryMan Guitar Pedal.
@@ -667,253 +670,253 @@ function createStereoChorus() {
                 v- FEEDBACK -|
     INPUT -> DELAY -> CHORUS -> OUTPUT
 */
-function createModDelay() {
-    // Create input node for incoming audio
-    var inputNode = audioContext.createGain();
+// function createModDelay() {
+//     // Create input node for incoming audio
+//     var inputNode = audioContext.createGain();
 
-    // SET UP DELAY NODE
-    var delayNode = audioContext.createDelay();
-    delayNode.delayTime.value = parseFloat( document.getElementById("mdtime").value );
-    mdtime = delayNode;
+//     // SET UP DELAY NODE
+//     var delayNode = audioContext.createDelay();
+//     delayNode.delayTime.value = parseFloat( document.getElementById("mdtime").value );
+//     mdtime = delayNode;
 
-    var feedbackGainNode = audioContext.createGain();
-    feedbackGainNode.gain.value = parseFloat( document.getElementById("mdfeedback").value );
-    mdfeedback = feedbackGainNode;
-
-
-    // SET UP CHORUS NODE
-    var chorus = audioContext.createDelay();
-    chorus.delayTime.value = parseFloat( document.getElementById("mddelay").value );
-    mddelay = chorus;
-
-    var osc  = audioContext.createOscillator();
-    var chorusRateGainNode = audioContext.createGain();
-    chorusRateGainNode.gain.value = parseFloat( document.getElementById("mddepth").value ); // depth of change to the delay:
-    mddepth = chorusRateGainNode;
-
-    osc.type = 'sine';
-    osc.frequency.value = parseFloat( document.getElementById("mdspeed").value );
-    mdspeed = osc;
-
-    osc.connect(chorusRateGainNode);
-    chorusRateGainNode.connect(chorus.delayTime);
-
-    // Connect the FX chain together
-    // create circular chain for delay to "feedback" to itself
-    inputNode.connect( delayNode );
-    delayNode.connect( chorus );
-    delayNode.connect( feedbackGainNode );
-    chorus.connect(feedbackGainNode);
-    feedbackGainNode.connect( delayNode );
-    feedbackGainNode.connect( wetGain );
+//     var feedbackGainNode = audioContext.createGain();
+//     feedbackGainNode.gain.value = parseFloat( document.getElementById("mdfeedback").value );
+//     mdfeedback = feedbackGainNode;
 
 
-    osc.start(0);
+//     // SET UP CHORUS NODE
+//     var chorus = audioContext.createDelay();
+//     chorus.delayTime.value = parseFloat( document.getElementById("mddelay").value );
+//     mddelay = chorus;
 
-    return inputNode;
-}
+//     var osc  = audioContext.createOscillator();
+//     var chorusRateGainNode = audioContext.createGain();
+//     chorusRateGainNode.gain.value = parseFloat( document.getElementById("mddepth").value ); // depth of change to the delay:
+//     mddepth = chorusRateGainNode;
 
-function createStereoFlange() {
-    var splitter = audioContext.createChannelSplitter(2);
-    var merger = audioContext.createChannelMerger(2);
-    var inputNode = audioContext.createGain();
-    sfllfb = audioContext.createGain();
-    sflrfb = audioContext.createGain();
-    sflspeed = audioContext.createOscillator();
-    sflldepth = audioContext.createGain();
-    sflrdepth = audioContext.createGain();
-    sflldelay = audioContext.createDelay();
-    sflrdelay = audioContext.createDelay();
+//     osc.type = 'sine';
+//     osc.frequency.value = parseFloat( document.getElementById("mdspeed").value );
+//     mdspeed = osc;
+
+//     osc.connect(chorusRateGainNode);
+//     chorusRateGainNode.connect(chorus.delayTime);
+
+//     // Connect the FX chain together
+//     // create circular chain for delay to "feedback" to itself
+//     inputNode.connect( delayNode );
+//     delayNode.connect( chorus );
+//     delayNode.connect( feedbackGainNode );
+//     chorus.connect(feedbackGainNode);
+//     feedbackGainNode.connect( delayNode );
+//     feedbackGainNode.connect( wetGain );
 
 
-    sfllfb.gain.value = sflrfb.gain.value = parseFloat( document.getElementById("sflfb").value );
+//     osc.start(0);
 
-    inputNode.connect( splitter );
-    inputNode.connect( wetGain );
+//     return inputNode;
+// }
 
-    sflldelay.delayTime.value = parseFloat( document.getElementById("sfldelay").value );
-    sflrdelay.delayTime.value = parseFloat( document.getElementById("sfldelay").value );
+// function createStereoFlange() {
+//     var splitter = audioContext.createChannelSplitter(2);
+//     var merger = audioContext.createChannelMerger(2);
+//     var inputNode = audioContext.createGain();
+//     sfllfb = audioContext.createGain();
+//     sflrfb = audioContext.createGain();
+//     sflspeed = audioContext.createOscillator();
+//     sflldepth = audioContext.createGain();
+//     sflrdepth = audioContext.createGain();
+//     sflldelay = audioContext.createDelay();
+//     sflrdelay = audioContext.createDelay();
 
-    splitter.connect( sflldelay, 0 );
-    splitter.connect( sflrdelay, 1 );
-    sflldelay.connect( sfllfb );
-    sflrdelay.connect( sflrfb );
-    sfllfb.connect( sflrdelay );
-    sflrfb.connect( sflldelay );
 
-    sflldepth.gain.value = parseFloat( document.getElementById("sfldepth").value ); // depth of change to the delay:
-    sflrdepth.gain.value = - parseFloat( document.getElementById("sfldepth").value ); // depth of change to the delay:
+//     sfllfb.gain.value = sflrfb.gain.value = parseFloat( document.getElementById("sflfb").value );
 
-    sflspeed.type = 'triangle';
-    sflspeed.frequency.value = parseFloat( document.getElementById("sflspeed").value );
+//     inputNode.connect( splitter );
+//     inputNode.connect( wetGain );
 
-    sflspeed.connect( sflldepth );
-    sflspeed.connect( sflrdepth );
+//     sflldelay.delayTime.value = parseFloat( document.getElementById("sfldelay").value );
+//     sflrdelay.delayTime.value = parseFloat( document.getElementById("sfldelay").value );
 
-    sflldepth.connect( sflldelay.delayTime );
-    sflrdepth.connect( sflrdelay.delayTime );
+//     splitter.connect( sflldelay, 0 );
+//     splitter.connect( sflrdelay, 1 );
+//     sflldelay.connect( sfllfb );
+//     sflrdelay.connect( sflrfb );
+//     sfllfb.connect( sflrdelay );
+//     sflrfb.connect( sflldelay );
 
-    sflldelay.connect( merger, 0, 0 );
-    sflrdelay.connect( merger, 0, 1 );
-    merger.connect( wetGain );
+//     sflldepth.gain.value = parseFloat( document.getElementById("sfldepth").value ); // depth of change to the delay:
+//     sflrdepth.gain.value = - parseFloat( document.getElementById("sfldepth").value ); // depth of change to the delay:
 
-    sflspeed.start(0);
+//     sflspeed.type = 'triangle';
+//     sflspeed.frequency.value = parseFloat( document.getElementById("sflspeed").value );
 
-    return inputNode;
-}
+//     sflspeed.connect( sflldepth );
+//     sflspeed.connect( sflrdepth );
 
-function createPitchShifter() {
-    effect = new Jungle( audioContext );
-    effect.output.connect( wetGain );
-    return effect.input;
-}
+//     sflldepth.connect( sflldelay.delayTime );
+//     sflrdepth.connect( sflrdelay.delayTime );
 
-function createEnvelopeFollower() {
-    var waveshaper = audioContext.createWaveShaper();
-    var lpf1 = audioContext.createBiquadFilter();
-    lpf1.type = "lowpass";
-    lpf1.frequency.value = 10.0;
+//     sflldelay.connect( merger, 0, 0 );
+//     sflrdelay.connect( merger, 0, 1 );
+//     merger.connect( wetGain );
 
-    var curve = new Float32Array(65536);
-    for (var i=-32768; i<32768; i++)
-        curve[i+32768] = ((i>0)?i:-i)/32768;
-    waveshaper.curve = curve;
-    waveshaper.connect(lpf1);
-    lpf1.connect(wetGain);
-    return waveshaper;
-}
+//     sflspeed.start(0);
 
-function createAutowah() {
-    var inputNode = audioContext.createGain();
-    var waveshaper = audioContext.createWaveShaper();
-    awFollower = audioContext.createBiquadFilter();
-    awFollower.type = "lowpass";
-    awFollower.frequency.value = 10.0;
+//     return inputNode;
+// }
 
-    var curve = new Float32Array(65536);
-    for (var i=-32768; i<32768; i++)
-        curve[i+32768] = ((i>0)?i:-i)/32768;
-    waveshaper.curve = curve;
-    waveshaper.connect(awFollower);
+// function createPitchShifter() {
+//     effect = new Jungle( audioContext );
+//     effect.output.connect( wetGain );
+//     return effect.input;
+// }
 
-    awDepth = audioContext.createGain();
-    awDepth.gain.value = 11585;
-    awFollower.connect(awDepth);
+// function createEnvelopeFollower() {
+//     var waveshaper = audioContext.createWaveShaper();
+//     var lpf1 = audioContext.createBiquadFilter();
+//     lpf1.type = "lowpass";
+//     lpf1.frequency.value = 10.0;
 
-    awFilter = audioContext.createBiquadFilter();
-    awFilter.type = "lowpass";
-    awFilter.Q.value = 15;
-    awFilter.frequency.value = 50;
-    awDepth.connect(awFilter.frequency);
-    awFilter.connect(wetGain);
+//     var curve = new Float32Array(65536);
+//     for (var i=-32768; i<32768; i++)
+//         curve[i+32768] = ((i>0)?i:-i)/32768;
+//     waveshaper.curve = curve;
+//     waveshaper.connect(lpf1);
+//     lpf1.connect(wetGain);
+//     return waveshaper;
+// }
 
-    inputNode.connect(waveshaper);
-    inputNode.connect(awFilter);
-    return inputNode;
-}
+// function createAutowah() {
+//     var inputNode = audioContext.createGain();
+//     var waveshaper = audioContext.createWaveShaper();
+//     awFollower = audioContext.createBiquadFilter();
+//     awFollower.type = "lowpass";
+//     awFollower.frequency.value = 10.0;
 
-function createNoiseGate() {
-    var inputNode = audioContext.createGain();
-    var rectifier = audioContext.createWaveShaper();
-    ngFollower = audioContext.createBiquadFilter();
-    ngFollower.type = "lowpass";
-    ngFollower.frequency.value = 10.0;
+//     var curve = new Float32Array(65536);
+//     for (var i=-32768; i<32768; i++)
+//         curve[i+32768] = ((i>0)?i:-i)/32768;
+//     waveshaper.curve = curve;
+//     waveshaper.connect(awFollower);
 
-    var curve = new Float32Array(65536);
-    for (var i=-32768; i<32768; i++)
-        curve[i+32768] = ((i>0)?i:-i)/32768;
-    rectifier.curve = curve;
-    rectifier.connect(ngFollower);
+//     awDepth = audioContext.createGain();
+//     awDepth.gain.value = 11585;
+//     awFollower.connect(awDepth);
 
-    ngGate = audioContext.createWaveShaper();
-    ngGate.curve = generateNoiseFloorCurve(parseFloat(document.getElementById("ngFloor").value));
+//     awFilter = audioContext.createBiquadFilter();
+//     awFilter.type = "lowpass";
+//     awFilter.Q.value = 15;
+//     awFilter.frequency.value = 50;
+//     awDepth.connect(awFilter.frequency);
+//     awFilter.connect(wetGain);
 
-    ngFollower.connect(ngGate);
+//     inputNode.connect(waveshaper);
+//     inputNode.connect(awFilter);
+//     return inputNode;
+// }
 
-    var gateGain = audioContext.createGain();
-    gateGain.gain.value = 0.0;
-    ngGate.connect( gateGain.gain );
+// function createNoiseGate() {
+//     var inputNode = audioContext.createGain();
+//     var rectifier = audioContext.createWaveShaper();
+//     ngFollower = audioContext.createBiquadFilter();
+//     ngFollower.type = "lowpass";
+//     ngFollower.frequency.value = 10.0;
 
-    gateGain.connect( wetGain);
+//     var curve = new Float32Array(65536);
+//     for (var i=-32768; i<32768; i++)
+//         curve[i+32768] = ((i>0)?i:-i)/32768;
+//     rectifier.curve = curve;
+//     rectifier.connect(ngFollower);
 
-    inputNode.connect(rectifier);
-    inputNode.connect(gateGain);
-    return inputNode;
-}
+//     ngGate = audioContext.createWaveShaper();
+//     ngGate.curve = generateNoiseFloorCurve(parseFloat(document.getElementById("ngFloor").value));
 
-function generateNoiseFloorCurve( floor ) {
-    // "floor" is 0...1
+//     ngFollower.connect(ngGate);
 
-    var curve = new Float32Array(65536);
-    var mappedFloor = floor * 32768;
+//     var gateGain = audioContext.createGain();
+//     gateGain.gain.value = 0.0;
+//     ngGate.connect( gateGain.gain );
 
-    for (var i=0; i<32768; i++) {
-        var value = (i<mappedFloor) ? 0 : 1;
+//     gateGain.connect( wetGain);
 
-        curve[32768-i] = -value;
-        curve[32768+i] = value;
-    }
-    curve[0] = curve[1]; // fixing up the end.
+//     inputNode.connect(rectifier);
+//     inputNode.connect(gateGain);
+//     return inputNode;
+// }
 
-    return curve;
-}
+// function generateNoiseFloorCurve( floor ) {
+//     // "floor" is 0...1
 
-function setBitCrusherDepth( bits ) {
-    var length = Math.pow(2, bits);
-    console.log("setting bitcrusher depth to " + bits + " bits, length = " + length );
-    var curve = new Float32Array( length );
+//     var curve = new Float32Array(65536);
+//     var mappedFloor = floor * 32768;
 
-    var lengthMinusOne = length - 1;
+//     for (var i=0; i<32768; i++) {
+//         var value = (i<mappedFloor) ? 0 : 1;
 
-    for (var i=0; i<length; i++)
-        curve[i] = (2 * i / lengthMinusOne) - 1;
+//         curve[32768-i] = -value;
+//         curve[32768+i] = value;
+//     }
+//     curve[0] = curve[1]; // fixing up the end.
 
-    if (bitCrusher)
-        bitCrusher.curve = curve;
-}
+//     return curve;
+// }
 
-var btcrBufferSize = 4096;
+// function setBitCrusherDepth( bits ) {
+//     var length = Math.pow(2, bits);
+//     console.log("setting bitcrusher depth to " + bits + " bits, length = " + length );
+//     var curve = new Float32Array( length );
 
-function createBitCrusher() {
-    var bitCrusher = audioContext.createScriptProcessor(btcrBufferSize, 1, 1);
-    var phaser = 0;
-    var last = 0;
+//     var lengthMinusOne = length - 1;
 
-    bitCrusher.onaudioprocess = function(e) {
-        var step = Math.pow(1/2, btcrBits);
-        for (var channel=0; channel<e.inputBuffer.numberOfChannels; channel++) {
-            var input = e.inputBuffer.getChannelData(channel);
-            var output = e.outputBuffer.getChannelData(channel);
-            for (var i = 0; i < btcrBufferSize; i++) {
-                phaser += btcrNormFreq;
-                if (phaser >= 1.0) {
-                    phaser -= 1.0;
-                    last = step * Math.floor(input[i] / step + 0.5);
-                }
-                output[i] = last;
-            }
-        }
-    };
-    bitCrusher.connect( wetGain );
-    return bitCrusher;
-}
+//     for (var i=0; i<length; i++)
+//         curve[i] = (2 * i / lengthMinusOne) - 1;
 
-btcrBits = 16,
-    btcrNormFreq
+//     if (bitCrusher)
+//         bitCrusher.curve = curve;
+// }
 
-function impulseResponse( duration, decay, reverse ) {
-    var sampleRate = audioContext.sampleRate;
-    var length = sampleRate * duration;
-    var impulse = audioContext.createBuffer(2, length, sampleRate);
-    var impulseL = impulse.getChannelData(0);
-    var impulseR = impulse.getChannelData(1);
+// var btcrBufferSize = 4096;
 
-    if (!decay)
-        decay = 2.0;
-    for (var i = 0; i < length; i++){
-      var n = reverse ? length - i : i;
-      impulseL[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / length, decay);
-      impulseR[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / length, decay);
-    }
-    return impulse;
-}
+// function createBitCrusher() {
+//     var bitCrusher = audioContext.createScriptProcessor(btcrBufferSize, 1, 1);
+//     var phaser = 0;
+//     var last = 0;
+
+//     bitCrusher.onaudioprocess = function(e) {
+//         var step = Math.pow(1/2, btcrBits);
+//         for (var channel=0; channel<e.inputBuffer.numberOfChannels; channel++) {
+//             var input = e.inputBuffer.getChannelData(channel);
+//             var output = e.outputBuffer.getChannelData(channel);
+//             for (var i = 0; i < btcrBufferSize; i++) {
+//                 phaser += btcrNormFreq;
+//                 if (phaser >= 1.0) {
+//                     phaser -= 1.0;
+//                     last = step * Math.floor(input[i] / step + 0.5);
+//                 }
+//                 output[i] = last;
+//             }
+//         }
+//     };
+//     bitCrusher.connect( wetGain );
+//     return bitCrusher;
+// }
+
+// btcrBits = 16,
+//     btcrNormFreq
+
+// function impulseResponse( duration, decay, reverse ) {
+//     var sampleRate = audioContext.sampleRate;
+//     var length = sampleRate * duration;
+//     var impulse = audioContext.createBuffer(2, length, sampleRate);
+//     var impulseL = impulse.getChannelData(0);
+//     var impulseR = impulse.getChannelData(1);
+
+//     if (!decay)
+//         decay = 2.0;
+//     for (var i = 0; i < length; i++){
+//       var n = reverse ? length - i : i;
+//       impulseL[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / length, decay);
+//       impulseR[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / length, decay);
+//     }
+//     return impulse;
+// }
