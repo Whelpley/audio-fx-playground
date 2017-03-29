@@ -3,14 +3,15 @@ var audioContext = new AudioContext();
 
 // TODO: do not have to declare Null at start
 // Is this the right place to declare all these Var's?
+// Checking through ...
 var audioInput = null,
-    realAudioInput = null,
+    // realAudioInput = null,
     effectInput = null,
     wetGain = null,
     dryGain = null,
     outputMix = null,
     currentEffectNode = null,
-    reverbBuffer = null,
+    reverbBuffer = null, // ?
     dtime = null,
     dregen = null,
     lfo = null,
@@ -96,21 +97,21 @@ function createLPInputFilter() {
 }
 
 
-function toggleMono() {
-    if (audioInput != realAudioInput) {
-        audioInput.disconnect();
-        realAudioInput.disconnect();
-        audioInput = realAudioInput;
-    } else {
-        realAudioInput.disconnect();
-        audioInput = convertToMono( realAudioInput );
-    }
+// function toggleMono() {
+//     if (audioInput != realAudioInput) {
+//         audioInput.disconnect();
+//         realAudioInput.disconnect();
+//         audioInput = realAudioInput;
+//     } else {
+//         realAudioInput.disconnect();
+//         audioInput = convertToMono( realAudioInput );
+//     }
 
-    createLPInputFilter();
-    lpInputFilter.connect(dryGain);
-    lpInputFilter.connect(analyser1);
-    lpInputFilter.connect(effectInput);
-}
+//     createLPInputFilter();
+//     lpInputFilter.connect(dryGain);
+//     lpInputFilter.connect(analyser1);
+//     lpInputFilter.connect(effectInput);
+// }
 
 var useFeedbackReduction = true;
 
