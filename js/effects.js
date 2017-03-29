@@ -139,6 +139,7 @@ function gotStream(stream) {
     dryGain = audioContext.createGain();
     wetGain = audioContext.createGain();
     effectInput = audioContext.createGain();
+
     audioInput.connect(dryGain);
     audioInput.connect(analyser1);
     audioInput.connect(effectInput);
@@ -146,6 +147,7 @@ function gotStream(stream) {
     wetGain.connect(outputMix);
     outputMix.connect( audioContext.destination);
     outputMix.connect(analyser2);
+
     crossfade(1.0);
     changeEffect();
     cancelAnalyserUpdates();
@@ -250,6 +252,7 @@ function keyPress(ev) {
 window.addEventListener('load', initAudio );
 
 window.addEventListener('keydown', keyPress );
+
 
 function crossfade(value) {
   // equal-power crossfade
@@ -459,57 +462,57 @@ function createDistortion() {
     return waveshaper.input;
 }
 
-function createGainLFO() {
-    var osc = audioContext.createOscillator();
-    var gain = audioContext.createGain();
-    var depth = audioContext.createGain();
+// function createGainLFO() {
+//     var osc = audioContext.createOscillator();
+//     var gain = audioContext.createGain();
+//     var depth = audioContext.createGain();
 
-    osc.type = document.getElementById("lfotype").value;
-    osc.frequency.value = parseFloat( document.getElementById("lfo").value );
+//     osc.type = document.getElementById("lfotype").value;
+//     osc.frequency.value = parseFloat( document.getElementById("lfo").value );
 
-    gain.gain.value = 1.0; // to offset
-    depth.gain.value = 1.0;
-    osc.connect(depth); // scales the range of the lfo
-
-
-    depth.connect(gain.gain);
-    gain.connect( wetGain );
-    lfo = osc;
-    lfotype = osc;
-    lfodepth = depth;
+//     gain.gain.value = 1.0; // to offset
+//     depth.gain.value = 1.0;
+//     osc.connect(depth); // scales the range of the lfo
 
 
-    osc.start(0);
-    return gain;
-}
+//     depth.connect(gain.gain);
+//     gain.connect( wetGain );
+//     lfo = osc;
+//     lfotype = osc;
+//     lfodepth = depth;
 
-function createFilterLFO() {
-    var osc = audioContext.createOscillator();
-    var gainMult = audioContext.createGain();
-    var gain = audioContext.createGain();
-    var filter = audioContext.createBiquadFilter();
 
-    filter.type = "lowpass";
-    filter.Q.value = parseFloat( document.getElementById("lplfoq").value );
-    lplfofilter = filter;
+//     osc.start(0);
+//     return gain;
+// }
 
-    osc.type = 'sine';
-    osc.frequency.value = parseFloat( document.getElementById("lplfo").value );
-    osc.connect( gain );
+// function createFilterLFO() {
+//     var osc = audioContext.createOscillator();
+//     var gainMult = audioContext.createGain();
+//     var gain = audioContext.createGain();
+//     var filter = audioContext.createBiquadFilter();
 
-    filter.frequency.value = 2500;  // center frequency - this is kinda arbitrary.
-    gain.gain.value = 2500 * parseFloat( document.getElementById("lplfodepth").value );
-    // this should make the -1 - +1 range of the osc translate to 0 - 5000Hz, if
-    // depth == 1.
+//     filter.type = "lowpass";
+//     filter.Q.value = parseFloat( document.getElementById("lplfoq").value );
+//     lplfofilter = filter;
 
-    gain.connect( filter.frequency );
-    filter.connect( wetGain );
-    lplfo = osc;
-    lplfodepth = gain;
+//     osc.type = 'sine';
+//     osc.frequency.value = parseFloat( document.getElementById("lplfo").value );
+//     osc.connect( gain );
 
-    osc.start(0);
-    return filter;
-}
+//     filter.frequency.value = 2500;  // center frequency - this is kinda arbitrary.
+//     gain.gain.value = 2500 * parseFloat( document.getElementById("lplfodepth").value );
+//     // this should make the -1 - +1 range of the osc translate to 0 - 5000Hz, if
+//     // depth == 1.
+
+//     gain.connect( filter.frequency );
+//     filter.connect( wetGain );
+//     lplfo = osc;
+//     lplfodepth = gain;
+
+//     osc.start(0);
+//     return filter;
+// }
 
 // function createRingmod() {
 //     var gain = audioContext.createGain();
