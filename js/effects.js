@@ -45,7 +45,7 @@ var dregen = null;
     // awFollower = null,
     // awDepth = null,
     // awFilter = null,
-    /* TODO: definitely rename before Angular conversion */
+    /* TODO: definitely rename these before Angular conversion */
     // ngFollower = null, 
     // ngGate = null,
     // bitCrusher = null,
@@ -53,8 +53,10 @@ var dregen = null;
     // btcrNormFreq = 1; // between 0.0 and 1.0
 
 var rafID = null;
+// for visuals - ? where is analyser2 declared ?
 var analyser1;
 var analyserView1;
+// for selecting audio input
 var constraints = 
 {
   audio: {
@@ -62,6 +64,7 @@ var constraints =
   }
 };
 
+// not a pure function
 function convertToMono( input ) {
     var splitter = audioContext.createChannelSplitter(2);
     var merger = audioContext.createChannelMerger(2);
@@ -75,12 +78,14 @@ function convertToMono( input ) {
 window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
 window.cancelAnimationFrame = window.cancelAnimationFrame || window.webkitCancelAnimationFrame;
 
+// visuals
 function cancelAnalyserUpdates() {
     if (rafID)
         window.cancelAnimationFrame( rafID );
     rafID = null;
 }
 
+// visuals
 function updateAnalysers(time) {
     analyserView1.doFrequencyAnalysis( analyser1 );
     analyserView2.doFrequencyAnalysis( analyser2 );
@@ -88,15 +93,18 @@ function updateAnalysers(time) {
     rafID = window.requestAnimationFrame( updateAnalysers );
 }
 
-var lpInputFilter=null;
+// for feedback reduction
+// should not be declared here
+// var lpInputFilter=null;
 
 // this is ONLY because we have massive feedback without filtering out
 // the top end in live speaker scenarios.
-function createLPInputFilter() {
-    lpInputFilter = audioContext.createBiquadFilter();
-    lpInputFilter.frequency.value = 2048;
-    return lpInputFilter;
-}
+// --- Not noticing a difference right now, removing:
+// function createLPInputFilter() {
+//     lpInputFilter = audioContext.createBiquadFilter();
+//     lpInputFilter.frequency.value = 2048;
+//     return lpInputFilter;
+// }
 
 // function toggleMono() {
 //     if (audioInput != realAudioInput) {
@@ -114,7 +122,9 @@ function createLPInputFilter() {
 //     lpInputFilter.connect(effectInput);
 // }
 
-var useFeedbackReduction = true;
+// toggles feedback reduction in gotStream()
+// Not noticing much difference when turning this to False
+// var useFeedbackReduction = true;
 
 function gotStream(stream) {
     // Create an AudioNode from the stream.
@@ -131,11 +141,12 @@ function gotStream(stream) {
 */
     audioInput = convertToMono( input );
 
-    if (useFeedbackReduction) {
-        audioInput.connect( createLPInputFilter() );
-        audioInput = lpInputFilter;
-        
-    }
+    // !!! Have not noticed a difference without this:
+    // if (useFeedbackReduction) {
+    //     audioInput.connect( createLPInputFilter() );
+    //     audioInput = lpInputFilter;    
+    // }
+
     // create mix gain nodes
     outputMix = audioContext.createGain();
     dryGain = audioContext.createGain();
@@ -156,6 +167,7 @@ function gotStream(stream) {
     updateAnalysers();
 }
 
+// to change the audio input
 function changeInput(){
   if (!!window.stream) {
     window.stream.stop();
