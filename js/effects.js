@@ -5,11 +5,14 @@ var audioContext = new AudioContext();
 // null !== undefined
 // Is this the right place to declare all these Var's?
 // Checking through, commenting out when not needed right away
+// moving to correct scope where applicable
 var audioInput = null;
     // realAudioInput = null,
 var effectInput = null;
+
 var wetGain = null;
 var dryGain = null;
+
 var currentEffectNode = null;
     // reverbBuffer = null, 
 var dtime = null;
@@ -125,6 +128,7 @@ function updateAnalysers(time) {
 // Not noticing much difference when turning this to False
 // var useFeedbackReduction = true;
 
+// main processing function for audio nodes
 function gotStream(stream) {
     // Create an AudioNode from the stream.
 
@@ -135,7 +139,6 @@ function gotStream(stream) {
     // moved out of global scope
     var outputMix = null;
     
-
 /*
     ???
     realAudioInput = audioContext.createBiquadFilter();
@@ -167,7 +170,7 @@ function gotStream(stream) {
     outputMix.connect( audioContext.destination);
     outputMix.connect(analyser2);
 
-    crossfade(1.0);
+    // crossfade(1.0);
     changeEffect();
     cancelAnalyserUpdates();
     updateAnalysers();
@@ -235,6 +238,7 @@ function initAudio() {
     if (!navigator.getUserMedia)
         return(alert("Error: getUserMedia not supported!"));
 
+    // IF we can getUserMedia, call gotStream
     navigator.getUserMedia(constraints, gotStream, function(e) {
             alert('Error getting audio');
             console.log(e);
@@ -276,18 +280,20 @@ window.addEventListener('load', initAudio );
 window.addEventListener('keydown', keyPress );
 
 
-function crossfade(value) {
-  // equal-power crossfade
-  var gain1 = Math.cos(value * 0.5*Math.PI);
-  var gain2 = Math.cos((1.0-value) * 0.5*Math.PI);
+// function crossfade(value) {
+//   // equal-power crossfade
+//   var gain1 = Math.cos(value * 0.5*Math.PI);
+//   var gain2 = Math.cos((1.0-value) * 0.5*Math.PI);
 
-  dryGain.gain.value = gain1;
-  wetGain.gain.value = gain2;
-}
+//   dryGain.gain.value = gain1;
+//   wetGain.gain.value = gain2;
+// }
 
-var lastEffect = -1;
 
 function changeEffect() {
+    // moved out of global scope
+    var lastEffect = -1;
+    
     // lfo = null;
     dtime = null;
     dregen = null;
@@ -473,6 +479,7 @@ function createDelay() {
 //     return convolver;
 // }
 
+// not the place to declare this var - up top, or in function
 var waveshaper = null;
 
 function createDistortion() {
