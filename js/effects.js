@@ -1,19 +1,20 @@
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext = new AudioContext();
 
-// TODO: do not have to declare Null at start
+// null == undefined
+// null !== undefined
 // Is this the right place to declare all these Var's?
-// Checking through ...
-var audioInput = null,
+// Checking through, commenting out when not needed right away
+var audioInput = null;
     // realAudioInput = null,
-    effectInput = null,
-    wetGain = null,
-    dryGain = null,
-    outputMix = null,
-    currentEffectNode = null,
+var effectInput = null;
+var wetGain = null;
+var dryGain = null;
+var outputMix = null;
+var currentEffectNode = null;
     // reverbBuffer = null, 
-    dtime = null,
-    dregen = null,
+var dtime = null;
+var dregen = null;
     // lfo = null,
     // cspeed = null,
     // cdelay = null,
@@ -534,7 +535,8 @@ function createDistortion() {
 //     return gain;
 // }
 
-var awg = null;
+// unknown var here...
+// var awg = null;
 
 // function createChorus() {
 //     var delayNode = audioContext.createDelay();
