@@ -10,7 +10,6 @@ var audioInput = null;
 var effectInput = null;
 var wetGain = null;
 var dryGain = null;
-var outputMix = null;
 var currentEffectNode = null;
     // reverbBuffer = null, 
 var dtime = null;
@@ -128,10 +127,17 @@ function updateAnalysers(time) {
 
 function gotStream(stream) {
     // Create an AudioNode from the stream.
-//    realAudioInput = audioContext.createMediaStreamSource(stream);
+
+    // ??? legacy code ???
+    // realAudioInput = audioContext.createMediaStreamSource(stream);
+
     var input = audioContext.createMediaStreamSource(stream);
+    // moved out of global scope
+    var outputMix = null;
+    
 
 /*
+    ???
     realAudioInput = audioContext.createBiquadFilter();
     realAudioInput.frequency.value = 60.0;
     realAudioInput.type = realAudioInput.NOTCH;
