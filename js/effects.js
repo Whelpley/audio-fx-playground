@@ -13,7 +13,9 @@ var effectInput = null;
 var wetGain = null;
 var dryGain = null;
 
+// the sound effect currently selected
 var currentEffectNode = null;
+
     // reverbBuffer = null, 
 var dtime = null;
 var dregen = null;
@@ -293,6 +295,9 @@ window.addEventListener('keydown', keyPress );
 var lastEffect = -1;
 
 function changeEffect() {
+    // reset all var's associated with effects 
+    // (should this be done here?)
+
     // lfo = null;
     dtime = null;
     dregen = null;
@@ -330,11 +335,13 @@ function changeEffect() {
     // ngGate = null;
     // bitCrusher = null;
 
+    // disengage with previous effects
     if (currentEffectNode) 
         currentEffectNode.disconnect();
     if (effectInput)
         effectInput.disconnect();
 
+        
     var effect = document.getElementById("effect").selectedIndex;
     var effectControls = document.getElementById("controls");
     if (lastEffect > -1)
