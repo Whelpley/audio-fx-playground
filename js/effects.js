@@ -289,11 +289,10 @@ window.addEventListener('keydown', keyPress );
 //   wetGain.gain.value = gain2;
 // }
 
+// should this be in global scope?
+var lastEffect = -1;
 
 function changeEffect() {
-    // moved out of global scope
-    var lastEffect = -1;
-    
     // lfo = null;
     dtime = null;
     dregen = null;
@@ -480,16 +479,16 @@ function createDelay() {
 // }
 
 // not the place to declare this var - up top, or in function
-var waveshaper = null;
+// var waveshaper = null;
 
-function createDistortion() {
-    if (!waveshaper)
-        waveshaper = new WaveShaper( audioContext );
+// function createDistortion() {
+//     if (!waveshaper)
+//         waveshaper = new WaveShaper( audioContext );
 
-    waveshaper.output.connect( wetGain );
-    waveshaper.setDrive(5.0);
-    return waveshaper.input;
-}
+//     waveshaper.output.connect( wetGain );
+//     waveshaper.setDrive(5.0);
+//     return waveshaper.input;
+// }
 
 // function createGainLFO() {
 //     var osc = audioContext.createOscillator();
