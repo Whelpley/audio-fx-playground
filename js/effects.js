@@ -73,7 +73,6 @@ var constraints =
   }
 };
 
-// not a pure function
 function convertToMono( input ) {
     var splitter = audioContext.createChannelSplitter(2);
     var merger = audioContext.createChannelMerger(2);
@@ -203,7 +202,7 @@ function gotStream(stream) {
     // outputMix.connect(analyser2);
 
     // crossfade(1.0);
-    changeEffect();
+    changeEffect(); // Initiates first sound effect
     // cancelAnalyserUpdates();
     // updateAnalysers();
 
@@ -255,17 +254,17 @@ function initAudio() {
     }
     irRRequest.send();
 
-    o3djs.require('o3djs.shader');
+    // o3djs.require('o3djs.shader');
 
-    analyser1 = audioContext.createAnalyser();
-    analyser1.fftSize = 1024;
-    analyser2 = audioContext.createAnalyser();
-    analyser2.fftSize = 1024;
+    // analyser1 = audioContext.createAnalyser();
+    // analyser1.fftSize = 1024;
+    // analyser2 = audioContext.createAnalyser();
+    // analyser2.fftSize = 1024;
 
-    analyserView1 = new AnalyserView("view1");
-    analyserView1.initByteBuffer( analyser1 );
-    analyserView2 = new AnalyserView("view2");
-    analyserView2.initByteBuffer( analyser2 );
+    // analyserView1 = new AnalyserView("view1");
+    // analyserView1.initByteBuffer( analyser1 );
+    // analyserView2 = new AnalyserView("view2");
+    // analyserView2.initByteBuffer( analyser2 );
 
     if (!navigator.getUserMedia)
         navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -285,7 +284,8 @@ function initAudio() {
         MediaStreamTrack.getSources(gotSources);
     }
 
-    document.getElementById("effect").onchange=changeEffect;
+    // Activates selection from effects menu
+    // document.getElementById("effect").onchange=changeEffect;
 }
 
 function keyPress(ev) {
@@ -310,8 +310,10 @@ function keyPress(ev) {
     }
 }
 
+// Start off the audio
 window.addEventListener('load', initAudio );
 
+// Listen for user input
 window.addEventListener('keydown', keyPress );
 
 
