@@ -10,15 +10,17 @@ var audioInput = null;
     // realAudioInput = null,
 var effectInput = null;
 
-var wetGain = null;
+var wetGain = null; 
 var dryGain = null;
 
 // the sound effect currently selected
 var currentEffectNode = null;
 
     // reverbBuffer = null, 
-var dtime = null;
-var dregen = null;
+
+var dtime = null; // in createDelay()
+var dregen = null; // in createDelay()
+
     // lfo = null,
     // cspeed = null,
     // cdelay = null,
@@ -57,9 +59,11 @@ var dregen = null;
     // btcrNormFreq = 1; // between 0.0 and 1.0
 
 var rafID = null;
+
 // for visuals - ? where is analyser2 declared ?
 var analyser1;
 var analyserView1;
+
 // for selecting audio input
 var constraints = 
 {
@@ -158,6 +162,9 @@ function gotStream(stream) {
     //     audioInput = lpInputFilter;    
     // }
 
+/*
+    // Original sequence of connections, with Visuals:
+
     // create mix gain nodes
     outputMix = audioContext.createGain();
     dryGain = audioContext.createGain();
@@ -176,6 +183,27 @@ function gotStream(stream) {
     changeEffect();
     cancelAnalyserUpdates();
     updateAnalysers();
+*/
+
+    // Reformed sequence of connections - no visuals
+    outputMix = audioContext.createGain();
+    dryGain = audioContext.createGain();
+    wetGain = audioContext.createGain();
+    effectInput = audioContext.createGain();
+
+    audioInput.connect(dryGain);
+    audioInput.connect(analyser1);
+    audioInput.connect(effectInput);
+    dryGain.connect(outputMix);
+    wetGain.connect(outputMix);
+    outputMix.connect( audioContext.destination);
+    outputMix.connect(analyser2);
+
+    // crossfade(1.0);
+    changeEffect();
+    // cancelAnalyserUpdates();
+    // updateAnalysers();
+
 }
 
 // to change the audio input
@@ -341,7 +369,7 @@ function changeEffect() {
     if (effectInput)
         effectInput.disconnect();
 
-        
+
     var effect = document.getElementById("effect").selectedIndex;
     var effectControls = document.getElementById("controls");
     if (lastEffect > -1)
