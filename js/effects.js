@@ -58,11 +58,12 @@ var dregen = null; // in createDelay()
     // btcrBits = 16,   // between 1 and 16
     // btcrNormFreq = 1; // between 0.0 and 1.0
 
-var rafID = null;
+// For visuals:
+// var rafID = null;
 
-// for visuals - ? where is analyser2 declared ?
-var analyser1;
-var analyserView1;
+// For visuals:
+// var analyser1;
+// var analyserView1;
 
 // for selecting audio input
 var constraints = 
@@ -83,23 +84,23 @@ function convertToMono( input ) {
     return merger;
 }
 
-window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
-window.cancelAnimationFrame = window.cancelAnimationFrame || window.webkitCancelAnimationFrame;
+// window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
+// window.cancelAnimationFrame = window.cancelAnimationFrame || window.webkitCancelAnimationFrame;
 
 // visuals
-function cancelAnalyserUpdates() {
-    if (rafID)
-        window.cancelAnimationFrame( rafID );
-    rafID = null;
-}
+// function cancelAnalyserUpdates() {
+//     if (rafID)
+//         window.cancelAnimationFrame( rafID );
+//     rafID = null;
+// }
 
 // visuals
-function updateAnalysers(time) {
-    analyserView1.doFrequencyAnalysis( analyser1 );
-    analyserView2.doFrequencyAnalysis( analyser2 );
+// function updateAnalysers(time) {
+//     analyserView1.doFrequencyAnalysis( analyser1 );
+//     analyserView2.doFrequencyAnalysis( analyser2 );
     
-    rafID = window.requestAnimationFrame( updateAnalysers );
-}
+//     rafID = window.requestAnimationFrame( updateAnalysers );
+// }
 
 // for feedback reduction
 // should not be declared here
@@ -145,15 +146,17 @@ function gotStream(stream) {
     // moved out of global scope
     var outputMix = null;
     
-/*
-    ???
-    realAudioInput = audioContext.createBiquadFilter();
-    realAudioInput.frequency.value = 60.0;
-    realAudioInput.type = realAudioInput.NOTCH;
-    realAudioInput.Q = 10.0;
+    /*
+        // ??? not sure what this does - commented out in original ???
 
-    input.connect( realAudioInput );
-*/
+        realAudioInput = audioContext.createBiquadFilter();
+        realAudioInput.frequency.value = 60.0;
+        realAudioInput.type = realAudioInput.NOTCH;
+        realAudioInput.Q = 10.0;
+
+        input.connect( realAudioInput );
+    */
+
     audioInput = convertToMono( input );
 
     // !!! Have not noticed a difference without this:
@@ -162,28 +165,28 @@ function gotStream(stream) {
     //     audioInput = lpInputFilter;    
     // }
 
-/*
-    // Original sequence of connections, with Visuals:
+    /*
+        // Original sequence of connections, with Visuals:
 
-    // create mix gain nodes
-    outputMix = audioContext.createGain();
-    dryGain = audioContext.createGain();
-    wetGain = audioContext.createGain();
-    effectInput = audioContext.createGain();
+        // create mix gain nodes
+        outputMix = audioContext.createGain();
+        dryGain = audioContext.createGain();
+        wetGain = audioContext.createGain();
+        effectInput = audioContext.createGain();
 
-    audioInput.connect(dryGain);
-    audioInput.connect(analyser1);
-    audioInput.connect(effectInput);
-    dryGain.connect(outputMix);
-    wetGain.connect(outputMix);
-    outputMix.connect( audioContext.destination);
-    outputMix.connect(analyser2);
+        audioInput.connect(dryGain);
+        audioInput.connect(analyser1);
+        audioInput.connect(effectInput);
+        dryGain.connect(outputMix);
+        wetGain.connect(outputMix);
+        outputMix.connect( audioContext.destination);
+        outputMix.connect(analyser2);
 
-    // crossfade(1.0);
-    changeEffect();
-    cancelAnalyserUpdates();
-    updateAnalysers();
-*/
+        // crossfade(1.0);
+        changeEffect();
+        cancelAnalyserUpdates();
+        updateAnalysers();
+    */
 
     // Reformed sequence of connections - no visuals
     outputMix = audioContext.createGain();
@@ -192,12 +195,12 @@ function gotStream(stream) {
     effectInput = audioContext.createGain();
 
     audioInput.connect(dryGain);
-    audioInput.connect(analyser1);
+    // audioInput.connect(analyser1);
     audioInput.connect(effectInput);
     dryGain.connect(outputMix);
     wetGain.connect(outputMix);
     outputMix.connect( audioContext.destination);
-    outputMix.connect(analyser2);
+    // outputMix.connect(analyser2);
 
     // crossfade(1.0);
     changeEffect();
