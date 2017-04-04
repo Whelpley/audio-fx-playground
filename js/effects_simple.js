@@ -1,4 +1,5 @@
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
 var audioContext = new AudioContext();
 
 var audioInput = null;
@@ -7,11 +8,8 @@ var effectInput = null;
 var wetGain = null; 
 var dryGain = null;
 
-// the sound effect currently selected
-var currentEffectNode = null;
-
-var dtime = null; // in createDelay()
-var dregen = null; // in createDelay()
+var dtime = null; // in createDelay(), others
+var dregen = null; // in createDelay(), others
 
 // for selecting audio input
 var constraints = 
@@ -20,6 +18,9 @@ var constraints =
       optional: [{ echoCancellation: false }]
   }
 };
+
+// should this be in global scope?
+var lastEffect = -1;
 
 function convertToMono( input ) {
     var splitter = audioContext.createChannelSplitter(2);
@@ -131,16 +132,11 @@ function keyPress(ev) {
     }
 }
 
-// Start off the audio
-window.addEventListener('load', initAudio );
-
-// Listen for user input
-window.addEventListener('keydown', keyPress );
-
-// should this be in global scope?
-var lastEffect = -1;
-
 function changeEffect() {
+    // the sound effect currently selected,
+    // moved out of global scope
+    var currentEffectNode = null;
+
     dtime = null;
     dregen = null;
     
@@ -186,3 +182,9 @@ function createDelay() {
 
     return delayNode;
 }
+
+// Start off the audio
+window.addEventListener('load', initAudio );
+
+// Listen for user input
+window.addEventListener('keydown', keyPress );
