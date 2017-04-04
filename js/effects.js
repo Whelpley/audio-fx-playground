@@ -210,19 +210,19 @@ function gotStream(stream) {
 }
 
 // to change the audio input
-function changeInput(){
-  if (!!window.stream) {
-    window.stream.stop();
-  }
-  var audioSelect = document.getElementById("audioinput");
-  var audioSource = audioSelect.value;
-  constraints.audio.optional.push({sourceId: audioSource});
+// function changeInput(){
+//   if (!!window.stream) {
+//     window.stream.stop();
+//   }
+//   var audioSelect = document.getElementById("audioinput");
+//   var audioSource = audioSelect.value;
+//   constraints.audio.optional.push({sourceId: audioSource});
 
-  navigator.getUserMedia(constraints, gotStream, function(e) {
-            alert('Error getting audio');
-            console.log(e);
-        });
-}
+//   navigator.getUserMedia(constraints, gotStream, function(e) {
+//             alert('Error getting audio');
+//             console.log(e);
+//         });
+// }
 
 function gotSources(sourceInfos) {
     var audioSelect = document.getElementById("audioinput");
@@ -238,7 +238,9 @@ function gotSources(sourceInfos) {
             audioSelect.appendChild(option);
         }
     }
-    audioSelect.onchange = changeInput;
+
+    // Relevant only if multiple audio input sources exist:
+    // audioSelect.onchange = changeInput;
 }
 
 function initAudio() {
