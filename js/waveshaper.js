@@ -85,6 +85,7 @@ function generateMirrorCurve(curve) {
     return curve;
 }
 
+// Context parameter must be an Audio Context object
 function WaveShaper(context) {
     this.context = context;
     var waveshaper = context.createWaveShaper();

@@ -2,11 +2,11 @@
 
 Sandbox for learning the Web Audio API.
 
-Using the [Audio Input Effects](https://github.com/cwilso/Audio-Input-Effects) repo as a base/inspiration, first re-creating the existing app, then building from there.
+Using the [Audio Input Effects](https://github.com/cwilso/Audio-Input-Effects) repo as a base/inspiration, first stripping down to simplest functionality, then re-creating the existing app, and then building from there.
 
 ## Further Project Goals
 
-* Add additional sound effects
+* Add additional sound effects.
 * Allow users to record sounds, then apply distortions (rather than just from live input).
 * Allow users to share uploaded sounds.
-* Convert to an Angular app
+* Convert to an Angular app.
