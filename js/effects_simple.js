@@ -26,7 +26,7 @@ var constraints =
 };
 
 // should this be in global scope?
-var lastEffect = -1;
+var lastEffect = -1; // in changeEffect(), ...
 
 // Functions re-sorted in order they are called
 // First calls at bottom of this document
@@ -117,6 +117,7 @@ function changeEffect() {
     // moved out of global scope
     var currentEffectNode = null;
 
+    // select current effects from uesr selection
     var effect = document.getElementById("effect").selectedIndex;
     var effectControls = document.getElementById("controls");
 
@@ -173,15 +174,14 @@ function gotSources(sourceInfos) {
     }
 }
 
-
-
+// ??? Not fully sure how this works ???
 function keyPress(ev) {
     console.log('Calling keyPress()');        
     
     var oldEffect = document.getElementById("effect").selectedIndex;
     var newEffect = oldEffect;
 
-    // ??? WTF ???
+    // ??? WTF does this do ???
     switch (ev.keyCode) {
       case 50: // 'r'
         newEffect = 1;
@@ -202,7 +202,7 @@ function keyPress(ev) {
     }
 }
 
-
+// captures the slider values to create a Delay Node, 
 function createDelay() {
     console.log('Calling createDelay()');        
     
