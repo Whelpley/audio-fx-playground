@@ -113,8 +113,8 @@ function convertToMono( input ) {
 function changeEffect() {
     console.log('Calling convertToMono()');    
 
-    // the sound effect currently selected,
-    // moved out of global scope
+    // the sound effect currently selected
+    // moved out of global scope - where does it belong?
     var currentEffectNode = null;
 
     // select current effects from uesr selection
@@ -175,32 +175,35 @@ function gotSources(sourceInfos) {
 }
 
 // ??? Not fully sure how this works ???
-function keyPress(ev) {
-    console.log('Calling keyPress()');        
+// hypothesis: shortcut for adding effects through key presses
+// function keyPress(ev) {
+//     console.log('Calling keyPress()');        
     
-    var oldEffect = document.getElementById("effect").selectedIndex;
-    var newEffect = oldEffect;
+//     var oldEffect = document.getElementById("effect").selectedIndex;
+//     var newEffect = oldEffect;
 
-    // ??? WTF does this do ???
-    switch (ev.keyCode) {
-      case 50: // 'r'
-        newEffect = 1;
-        break;
-      case 49: // 'c'
-        newEffect = 8;
-        break;
-      case 51: // 'p'
-        newEffect = 10;
-        break;
-      default:
-        console.log(ev.keyCode);
-    }
+//     // ??? WTF does this do ???
+//     // Shortcut, input:effect
+//     // Not needed in basic version
+//     switch (ev.keyCode) {
+//       case 49: // press '1' for Stereo Chorus
+//         newEffect = 8;
+//         break;
+//       case 50: // press '2' for Reverb
+//         newEffect = 1;
+//         break;
+//       case 51: // press '3' for Pitch Shifter
+//         newEffect = 10;
+//         break;
+//       default:
+//         console.log(ev.keyCode);
+//     }
 
-    if (newEffect != oldEffect) {
-        document.getElementById("effect").selectedIndex = newEffect;
-        changeEffect();
-    }
-}
+//     if (newEffect != oldEffect) {
+//         document.getElementById("effect").selectedIndex = newEffect;
+//         changeEffect();
+//     }
+// }
 
 // captures the slider values to create a Delay Node, 
 function createDelay() {
@@ -226,4 +229,5 @@ function createDelay() {
 window.addEventListener('load', initAudio );
 
 // Listen for user input
-window.addEventListener('keydown', keyPress );
+// Only listens for key presses; other changes are made when menu selections are made
+// window.addEventListener('keydown', keyPress );
