@@ -66,6 +66,7 @@ var dregen = null; // in createDelay()
 // var analyserView1;
 
 // for selecting audio input
+// used in initAudio(), changeInput()
 var constraints = 
 {
   audio: {
@@ -107,7 +108,7 @@ function convertToMono( input ) {
 
 // this is ONLY because we have massive feedback without filtering out
 // the top end in live speaker scenarios.
-// --- Not noticing a difference right now, removing:
+// --- This does make a difference, but returning it later.
 // function createLPInputFilter() {
 //     lpInputFilter = audioContext.createBiquadFilter();
 //     lpInputFilter.frequency.value = 2048;
