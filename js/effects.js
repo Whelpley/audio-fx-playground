@@ -309,7 +309,7 @@ function keyPress(ev) {
       default:
         console.log(ev.keyCode);
     }
-    
+
     if (newEffect != oldEffect) {
         document.getElementById("effect").selectedIndex = newEffect;
         changeEffect();
@@ -319,7 +319,7 @@ function keyPress(ev) {
 // Start off the audio
 window.addEventListener('load', initAudio );
 
-// Listen for user input
+// Listen for user key presses - not strictly needed
 window.addEventListener('keydown', keyPress );
 
 

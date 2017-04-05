@@ -32,17 +32,20 @@
 	</div>
 
 	<div id="arranger">
-		<div>
+		<!--Radio select for visualization options-->
+		<!--<div>
 			<input type="radio" name="radioSet" value="data" checked="checked" 
 			onmousedown="analyserView1.setAnalysisType(ANALYSISTYPE_3D_SONOGRAM); analyserView2.setAnalysisType(ANALYSISTYPE_3D_SONOGRAM);">3D Sonogram
-		</div>
+		</div>-->
 
+		<!--Select Box select for audio effects-->
 		<div id="effectMix">Effect: 
 			<select id="effect">
 				<option>Delay </option>
 			</select>
 		</div>
 
+		<!--Control Panels for each audio effect-->
 		<div id="controls">
 			<div id="delayControls">A basic digital delay.<br>
 				Delay time: <input id="dtime" type="range" min="0.01" max="3" step="0.01" value="0.15" style="height: 20px; width: 200px" onInput="if (dtime) dtime.delayTime.value = event.target.value;"><br>
@@ -50,6 +53,7 @@
 				onInput="if (dregen) dregen.gain.value = event.target.value;">
 			</div>
 		</div>
+		
 	</div>
 
 </body>

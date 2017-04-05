@@ -62,7 +62,8 @@ function initAudio() {
     if ((typeof MediaStreamTrack === 'undefined')||(!MediaStreamTrack.getSources)){
         console.log("This browser does not support MediaStreamTrack, so doesn't support selecting sources.\n\nTry Chrome Canary.");
     } else {
-        MediaStreamTrack.getSources(gotSources);
+        console.log("MediaStreamTrack.getSources() would be called here.")
+        // MediaStreamTrack.getSources(gotSources);
     }
 
     // Activates selection from effects menu
@@ -129,9 +130,6 @@ function changeEffect() {
     // disengage with previous effects
     if (currentEffectNode) 
         currentEffectNode.disconnect();
-    // ??? unsure if effectInput does anything ???
-    // if (effectInput)
-        // effectInput.disconnect();
 
     // Code smell: does lastEffect need to be in global scope?
     // IF: there was a Last effect, rather than page loading
@@ -154,54 +152,23 @@ function changeEffect() {
 
 
 // Called to add a source other than live microphone
-// Not tested out yet
-function gotSources(sourceInfos) {
-    console.log('Calling gotSources()');   
+// Not tested out yet, removing temporarily
+// function gotSources(sourceInfos) {
+//     console.log('Calling gotSources()');   
 
-    var audioSelect = document.getElementById("audioinput");
+//     var audioSelect = document.getElementById("audioinput");
 
-    while (audioSelect.firstChild)
-        audioSelect.removeChild(audioSelect.firstChild);
+//     while (audioSelect.firstChild)
+//         audioSelect.removeChild(audioSelect.firstChild);
 
-    for (var i = 0; i != sourceInfos.length; ++i) {
-        var sourceInfo = sourceInfos[i];
-        if (sourceInfo.kind === 'audio') {
-            var option = document.createElement("option");
-            option.value = sourceInfo.id;
-            option.text = sourceInfo.label || 'input ' + (audioSelect.length + 1);
-            audioSelect.appendChild(option);
-        }
-    }
-}
-
-// ??? Not fully sure how this works ???
-// hypothesis: shortcut for adding effects through key presses
-// function keyPress(ev) {
-//     console.log('Calling keyPress()');        
-    
-//     var oldEffect = document.getElementById("effect").selectedIndex;
-//     var newEffect = oldEffect;
-
-//     // ??? WTF does this do ???
-//     // Shortcut, input:effect
-//     // Not needed in basic version
-//     switch (ev.keyCode) {
-//       case 49: // press '1' for Stereo Chorus
-//         newEffect = 8;
-//         break;
-//       case 50: // press '2' for Reverb
-//         newEffect = 1;
-//         break;
-//       case 51: // press '3' for Pitch Shifter
-//         newEffect = 10;
-//         break;
-//       default:
-//         console.log(ev.keyCode);
-//     }
-
-//     if (newEffect != oldEffect) {
-//         document.getElementById("effect").selectedIndex = newEffect;
-//         changeEffect();
+//     for (var i = 0; i != sourceInfos.length; ++i) {
+//         var sourceInfo = sourceInfos[i];
+//         if (sourceInfo.kind === 'audio') {
+//             var option = document.createElement("option");
+//             option.value = sourceInfo.id;
+//             option.text = sourceInfo.label || 'input ' + (audioSelect.length + 1);
+//             audioSelect.appendChild(option);
+//         }
 //     }
 // }
 
@@ -227,7 +194,3 @@ function createDelay() {
 
 // Start off the audio
 window.addEventListener('load', initAudio );
-
-// Listen for user input
-// Only listens for key presses; other changes are made when menu selections are made
-// window.addEventListener('keydown', keyPress );
