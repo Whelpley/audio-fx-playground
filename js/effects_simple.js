@@ -32,6 +32,7 @@ var lastEffect = -1;
 // First calls at bottom of this document
 
 function initAudio() {
+    console.log('Calling initAudio()');        
     var irRRequest = new XMLHttpRequest();
     irRRequest.open("GET", "sounds/cardiod-rear-levelled.wav", true);
     irRRequest.responseType = "arraybuffer";
@@ -50,6 +51,7 @@ function initAudio() {
         return(alert("Error: getUserMedia not supported!"));
 
     // IF we can getUserMedia, call gotStream
+    // used for processing live microphone input
     navigator.getUserMedia(constraints, gotStream, function(e) {
             alert('Error getting audio');
             console.log(e);
@@ -71,7 +73,7 @@ function initAudio() {
 function gotStream(stream) {
     console.log('Calling gotStream()');
 
-    // ??? Create an AudioNode from the stream ?
+    // ??? Create an AudioNode from the stream ???
     var input = audioContext.createMediaStreamSource(stream);
     // moved out of global scope
     var outputMix = null;
@@ -82,10 +84,12 @@ function gotStream(stream) {
     outputMix = audioContext.createGain();
     dryGain = audioContext.createGain();
     wetGain = audioContext.createGain();
+    // ??? Does this do anything ???    
     // effectInput = audioContext.createGain();
 
     // Reformed sequence of connections - no visuals    
     audioInput.connect(dryGain);
+    // ??? Does this do anything ???
     // audioInput.connect(effectInput);
     dryGain.connect(outputMix);
     wetGain.connect(outputMix);
@@ -95,6 +99,8 @@ function gotStream(stream) {
 }
 
 function convertToMono( input ) {
+    console.log('Calling convertToMono()');    
+
     var splitter = audioContext.createChannelSplitter(2);
     var merger = audioContext.createChannelMerger(2);
 
@@ -104,67 +110,31 @@ function convertToMono( input ) {
     return merger;
 }
 
-
-// Called to add a source other than live microphone
-// Not tested out yet
-function gotSources(sourceInfos) {
-    var audioSelect = document.getElementById("audioinput");
-    while (audioSelect.firstChild)
-        audioSelect.removeChild(audioSelect.firstChild);
-
-    for (var i = 0; i != sourceInfos.length; ++i) {
-        var sourceInfo = sourceInfos[i];
-        if (sourceInfo.kind === 'audio') {
-            var option = document.createElement("option");
-            option.value = sourceInfo.id;
-            option.text = sourceInfo.label || 'input ' + (audioSelect.length + 1);
-            audioSelect.appendChild(option);
-        }
-    }
-}
-
-
-
-function keyPress(ev) {
-    var oldEffect = document.getElementById("effect").selectedIndex;
-    var newEffect = oldEffect;
-    switch (ev.keyCode) {
-      case 50: // 'r'
-        newEffect = 1;
-        break;
-      case 49: // 'c'
-        newEffect = 8;
-        break;
-      case 51: // 'p'
-        newEffect = 10;
-        break;
-      default:
-        console.log(ev.keyCode);
-    }
-    if (newEffect != oldEffect) {
-        document.getElementById("effect").selectedIndex = newEffect;
-        changeEffect();
-    }
-}
-
 function changeEffect() {
+    console.log('Calling convertToMono()');    
+
     // the sound effect currently selected,
     // moved out of global scope
     var currentEffectNode = null;
 
+    var effect = document.getElementById("effect").selectedIndex;
+    var effectControls = document.getElementById("controls");
+
+    // Var's associated with effects are all resest here
+    // ??? Better way: object to gather var's ???
     dtime = null;
     dregen = null;
     
     // disengage with previous effects
     if (currentEffectNode) 
         currentEffectNode.disconnect();
+    // ??? unsure if effectInput does anything ???
     // if (effectInput)
         // effectInput.disconnect();
 
-
-    var effect = document.getElementById("effect").selectedIndex;
-    var effectControls = document.getElementById("controls");
     // Code smell: does lastEffect need to be in global scope?
+    // IF: there was a Last effect, rather than page loading
+    // add display class to effect controls for current effect, remove 
     if (lastEffect > -1)
         effectControls.children[lastEffect].classList.remove("display");
     lastEffect = effect;
@@ -182,13 +152,66 @@ function changeEffect() {
 }
 
 
+// Called to add a source other than live microphone
+// Not tested out yet
+function gotSources(sourceInfos) {
+    console.log('Calling gotSources()');   
+
+    var audioSelect = document.getElementById("audioinput");
+
+    while (audioSelect.firstChild)
+        audioSelect.removeChild(audioSelect.firstChild);
+
+    for (var i = 0; i != sourceInfos.length; ++i) {
+        var sourceInfo = sourceInfos[i];
+        if (sourceInfo.kind === 'audio') {
+            var option = document.createElement("option");
+            option.value = sourceInfo.id;
+            option.text = sourceInfo.label || 'input ' + (audioSelect.length + 1);
+            audioSelect.appendChild(option);
+        }
+    }
+}
+
+
+
+function keyPress(ev) {
+    console.log('Calling keyPress()');        
+    
+    var oldEffect = document.getElementById("effect").selectedIndex;
+    var newEffect = oldEffect;
+
+    // ??? WTF ???
+    switch (ev.keyCode) {
+      case 50: // 'r'
+        newEffect = 1;
+        break;
+      case 49: // 'c'
+        newEffect = 8;
+        break;
+      case 51: // 'p'
+        newEffect = 10;
+        break;
+      default:
+        console.log(ev.keyCode);
+    }
+
+    if (newEffect != oldEffect) {
+        document.getElementById("effect").selectedIndex = newEffect;
+        changeEffect();
+    }
+}
+
+
 function createDelay() {
+    console.log('Calling createDelay()');        
+    
     var delayNode = audioContext.createDelay();
+    var gainNode = audioContext.createGain();    
 
     delayNode.delayTime.value = parseFloat( document.getElementById("dtime").value );
     dtime = delayNode;
 
-    var gainNode = audioContext.createGain();
     gainNode.gain.value = parseFloat( document.getElementById("dregen").value );
     dregen = gainNode;
 
