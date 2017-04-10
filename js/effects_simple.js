@@ -172,7 +172,7 @@ function changeEffect() {
 //     }
 // }
 
-// captures the slider values to create a Delay Node, 
+// captures the slider values to create a Delay Node
 function createDelay() {
     console.log('Calling createDelay()');        
     

@@ -12,3 +12,8 @@ To see it in action, open the index.html file in Firefox (other browser support 
 * Allow users to record sounds, then apply distortions (rather than just from live input).
 * Allow users to share uploaded sounds.
 * Convert to an Angular app.
+
+## Stretch Goals
+
+* SoundCloud integration
+* Visualizations using SVG instead of Canvas
