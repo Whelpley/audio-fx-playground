@@ -1,3 +1,5 @@
+// * asterisk indicates comments related to Angular conversion
+
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 // Variable declarations: used across multiple functions
@@ -9,9 +11,9 @@ var audioInput = null;
 // unsure if this node actually connects to anything...
 // var effectInput = null;
 
-// used across effects functions
+// used across effects functions for volume control
 var wetGain = null; 
-var dryGain = null;
+var dryGain = null; 
 
 var dtime = null; // in createDelay(), other effects
 var dregen = null; // in createDelay(), other effects

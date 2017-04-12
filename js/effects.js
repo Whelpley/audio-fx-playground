@@ -10,8 +10,8 @@ var audioInput = null;
     // realAudioInput = null,
 var effectInput = null;
 
-var wetGain = null; 
-var dryGain = null;
+var wetGain = null; // gain for processed audio
+var dryGain = null; // gain for input audio
 
 // the sound effect currently selected
 var currentEffectNode = null;
