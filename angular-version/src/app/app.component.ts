@@ -25,6 +25,8 @@ export class Effect {
       <label>Effect ID: </label>{{effect.id}}
     </div>  	
 		<div id="controls">
+      <h4>Where am I?</h4>
+
 			<div id="delayControls">Description: {{effect.description}}<br>
 				Delay time: <input id="dtime" type="range" min="0.01" max="3" step="0.01" value="0.15" style="height: 20px; width: 200px" onInput="if (dtime) dtime.delayTime.value = event.target.value;"><br>
 				Regen: <input id="dregen" type="range" min="0.0" max="1.0" step="0.01" value="0.75" style="height: 20px; width: 200px;" 

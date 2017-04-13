@@ -114,7 +114,7 @@ function convertToMono( input ) {
 }
 
 function changeEffect() {
-    console.log('Calling convertToMono()');    
+    console.log('Calling changeEffect()');    
 
     // the sound effect currently selected
     // moved out of global scope - where does it belong?

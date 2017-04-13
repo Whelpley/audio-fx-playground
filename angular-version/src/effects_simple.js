@@ -98,7 +98,9 @@ function gotStream(stream) {
     wetGain.connect(outputMix);
     outputMix.connect( audioContext.destination);
 
-    changeEffect(); // Initiates first sound effect
+    // changeEffect(); // Initiates first sound effect
+    // instead directly hooking in a single effect
+    audioInput.connect( createDelay() )
 }
 
 function convertToMono( input ) {
@@ -113,44 +115,44 @@ function convertToMono( input ) {
     return merger;
 }
 
-function changeEffect() {
-    console.log('Calling convertToMono()');    
+// function changeEffect() {
+//     console.log('Calling changeEffect()');    
 
-    // the sound effect currently selected
-    // moved out of global scope - where does it belong?
-    var currentEffectNode = null;
+//     // the sound effect currently selected
+//     // moved out of global scope - where does it belong?
+//     var currentEffectNode = null;
 
-    // select current effects from uesr selection
-    var effect = document.getElementById("effect").selectedIndex;
-    var effectControls = document.getElementById("controls");
+//     // select current effects from uesr selection
+//     var effect = document.getElementById("effect").selectedIndex;
+//     var effectControls = document.getElementById("controls");
 
-    // Var's associated with effects are all resest here
-    // ??? Better way: object to gather var's ???
-    dtime = null;
-    dregen = null;
+//     // Var's associated with effects are all resest here
+//     // ??? Better way: object to gather var's ???
+//     dtime = null;
+//     dregen = null;
     
-    // disengage with previous effects
-    if (currentEffectNode) 
-        currentEffectNode.disconnect();
+//     // disengage with previous effects
+//     if (currentEffectNode) 
+//         currentEffectNode.disconnect();
 
-    // Code smell: does lastEffect need to be in global scope?
-    // IF: there was a Last effect, rather than page loading
-    // add display class to effect controls for current effect, remove 
-    if (lastEffect > -1)
-        effectControls.children[lastEffect].classList.remove("display");
-    lastEffect = effect;
-    effectControls.children[effect].classList.add("display");
+//     // Code smell: does lastEffect need to be in global scope?
+//     // IF: there was a Last effect, rather than page loading
+//     // add display class to effect controls for current effect, remove 
+//     if (lastEffect > -1)
+//         effectControls.children[lastEffect].classList.remove("display");
+//     lastEffect = effect;
+//     effectControls.children[effect].classList.add("display");
 
-    switch (effect) {
-        case 0: // Delay
-            currentEffectNode = createDelay();
-            break;
+//     switch (effect) {
+//         case 0: // Delay
+//             currentEffectNode = createDelay();
+//             break;
      
-        default:
-            break;
-    }
-    audioInput.connect( currentEffectNode );
-}
+//         default:
+//             break;
+//     }
+//     audioInput.connect( currentEffectNode );
+// }
 
 
 // Called to add a source other than live microphone
