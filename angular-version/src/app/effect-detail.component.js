@@ -36,9 +36,9 @@ HeroDetailComponent = __decorate([
         templateUrl: './hero-detail.component.html',
         styleUrls: ['./hero-detail.component.css']
     }),
-    __metadata("design:paramtypes", [hero_service_1.HeroService,
-        router_1.ActivatedRoute,
+    __metadata("design:paramtypes", [typeof (_a = typeof hero_service_1.HeroService !== "undefined" && hero_service_1.HeroService) === "function" && _a || Object, router_1.ActivatedRoute,
         common_1.Location])
 ], HeroDetailComponent);
 exports.HeroDetailComponent = HeroDetailComponent;
-//# sourceMappingURL=hero-detail.component.js.map
+var _a;
+//# sourceMappingURL=effect-detail.component.js.map

@@ -1,5 +1,5 @@
 "use strict";
-exports.HEROES = [
+exports.effects = [
     { id: 11, name: 'Mr. Nice' },
     { id: 12, name: 'Narco' },
     { id: 13, name: 'Bombasto' },
@@ -11,4 +11,4 @@ exports.HEROES = [
     { id: 19, name: 'Magma' },
     { id: 20, name: 'Tornado' }
 ];
-//# sourceMappingURL=mock-heroes.js.map
+//# sourceMappingURL=mock-effects.js.map

@@ -1,0 +1,14 @@
+<h2>My effects</h2>
+<ul class="effects">
+  <li *ngFor="let effect of effects"
+    [class.selected]="effect === selectedeffect"
+    (click)="onSelect(effect)">
+    <span class="badge">{{effect.id}}</span> {{effect.name}}
+  </li>
+</ul>
+<div *ngIf="selectedEffect">
+  <h2>
+    {{selectedEffect.name | uppercase}} is my effect
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
