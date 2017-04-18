@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms"); // <-- NgModel lives here
-// import { AudioContextModule } from 'angular-audio-context';
 var app_component_1 = require("./app.component");
 var AppModule = (function () {
     function AppModule() {
@@ -19,7 +18,7 @@ AppModule = __decorate([
     core_1.NgModule({
         imports: [
             platform_browser_1.BrowserModule,
-            forms_1.FormsModule
+            forms_1.FormsModule // <-- import the FormsModule before binding with [(ngModel)]
         ],
         declarations: [
             app_component_1.AppComponent
@@ -28,4 +27,9 @@ AppModule = __decorate([
     })
 ], AppModule);
 exports.AppModule = AppModule;
+/*
+Copyright 2017 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+*/ 
 //# sourceMappingURL=app.module.js.map

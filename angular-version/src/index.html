@@ -1,43 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <title>Audio FX Playground - Angular version</title>
-    <base href="/">
+    <title>Angular Tour of Heroes</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Polyfill(s) for older browsers -->
-    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <!-- Polyfills -->
+    <script src="https://unpkg.com/core-js/client/shim.min.js"></script>
 
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="https://unpkg.com/zone.js@0.8.4?main=browser"></script>
+    <script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script>
 
     <script src="systemjs.config.js"></script>
     <script>
       System.import('main.js').catch(function(err){ console.error(err); });
     </script>
-
-    <!--Totally not the Angular way, these scripts are to be converted-->
-    <ascript src="http://cwilso.github.io/AudioContext-MonkeyPatch/AudioContextMonkeyPatch.js"></ascript>
-
-    <!--Main effects controls -->
-    <script src="effects_simple.js"></script>
-
-    <!--Show controls for effect if has the class "display", o/w hide-->
-    <!--<style>
-      body { font: 14pt Arial, sans-serif; background: #333; color: gray; }
-      select { font: 14pt Arial, sans-serif; }
-      div#controls div { display:none; border: 1px solid darkgray; border-radius: 5px; padding: 10px; width: 728px;}
-      div#controls div.display { display: block; }
-      #controls { padding-top: 24px;}
-      #effectMix { padding-top: 12px;}
-      #arranger { width:750px; margin: 25px auto}
-    </style>-->
-
   </head>
 
   <body>
-    <my-app>Loading AppComponent content here ...</my-app>
+    <my-app>Loading...</my-app>
   </body>
 </html>
+
+
