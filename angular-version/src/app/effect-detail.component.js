@@ -12,33 +12,33 @@ require("rxjs/add/operator/switchMap");
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var common_1 = require("@angular/common");
-var hero_service_1 = require("./hero.service");
-var HeroDetailComponent = (function () {
-    function HeroDetailComponent(heroService, route, location) {
-        this.heroService = heroService;
+var effect_service_1 = require("./effect.service");
+var EffectDetailComponent = (function () {
+    function EffectDetailComponent(effectService, route, location) {
+        this.effectService = effectService;
         this.route = route;
         this.location = location;
     }
-    HeroDetailComponent.prototype.ngOnInit = function () {
+    EffectDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params
-            .switchMap(function (params) { return _this.heroService.getHero(+params['id']); })
-            .subscribe(function (hero) { return _this.hero = hero; });
+            .switchMap(function (params) { return _this.effectService.getEffect(+params['id']); })
+            .subscribe(function (effect) { return _this.effect = effect; });
     };
-    HeroDetailComponent.prototype.goBack = function () {
+    EffectDetailComponent.prototype.goBack = function () {
         this.location.back();
     };
-    return HeroDetailComponent;
+    return EffectDetailComponent;
 }());
-HeroDetailComponent = __decorate([
+EffectDetailComponent = __decorate([
     core_1.Component({
-        selector: 'hero-detail',
-        templateUrl: './hero-detail.component.html',
-        styleUrls: ['./hero-detail.component.css']
+        selector: 'effect-detail',
+        templateUrl: './effect-detail.component.html',
+        styleUrls: ['./effect-detail.component.css']
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof hero_service_1.HeroService !== "undefined" && hero_service_1.HeroService) === "function" && _a || Object, router_1.ActivatedRoute,
+    __metadata("design:paramtypes", [effect_service_1.EffectService,
+        router_1.ActivatedRoute,
         common_1.Location])
-], HeroDetailComponent);
-exports.HeroDetailComponent = HeroDetailComponent;
-var _a;
+], EffectDetailComponent);
+exports.EffectDetailComponent = EffectDetailComponent;
 //# sourceMappingURL=effect-detail.component.js.map

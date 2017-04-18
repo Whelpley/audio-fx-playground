@@ -10,12 +10,12 @@ import { EffectService } from './effect.service';
 })
 export class DashboardComponent implements OnInit {
 
-  effects: effect[] = [];
+  effects: Effect[] = [];
 
   constructor(private effectService: EffectService) { }
 
   ngOnInit(): void {
-    this.effectService.geteffects()
+    this.effectService.getEffects()
       .then(effects => this.effects = effects.slice(1, 5));
   }
 }

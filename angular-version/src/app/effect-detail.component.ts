@@ -21,7 +21,7 @@ export class EffectDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params
-      .switchMap((params: Params) => this.effectService.geteffect(+params['id']))
+      .switchMap((params: Params) => this.effectService.getEffect(+params['id']))
       .subscribe(effect => this.effect = effect);
   }
 

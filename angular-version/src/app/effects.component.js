@@ -10,35 +10,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var hero_service_1 = require("./hero.service");
-var HeroesComponent = (function () {
-    function HeroesComponent(router, heroService) {
+var effect_service_1 = require("./effect.service");
+var EffectsComponent = (function () {
+    function EffectsComponent(router, effectService) {
         this.router = router;
-        this.heroService = heroService;
+        this.effectService = effectService;
     }
-    HeroesComponent.prototype.getHeroes = function () {
+    EffectsComponent.prototype.getEffects = function () {
         var _this = this;
-        this.heroService.getHeroes().then(function (heroes) { return _this.heroes = heroes; });
+        this.effectService.getEffects().then(function (effects) { return _this.effects = effects; });
     };
-    HeroesComponent.prototype.ngOnInit = function () {
-        this.getHeroes();
+    EffectsComponent.prototype.ngOnInit = function () {
+        this.getEffects();
     };
-    HeroesComponent.prototype.onSelect = function (hero) {
-        this.selectedHero = hero;
+    EffectsComponent.prototype.onSelect = function (effect) {
+        this.selectedEffect = effect;
     };
-    HeroesComponent.prototype.gotoDetail = function () {
-        this.router.navigate(['/detail', this.selectedHero.id]);
+    EffectsComponent.prototype.gotoDetail = function () {
+        this.router.navigate(['/detail', this.selectedEffect.id]);
     };
-    return HeroesComponent;
+    return EffectsComponent;
 }());
-HeroesComponent = __decorate([
+EffectsComponent = __decorate([
     core_1.Component({
-        selector: 'my-heroes',
-        templateUrl: './heroes.component.html',
-        styleUrls: ['./heroes.component.css']
+        selector: 'my-effects',
+        templateUrl: './effects.component.html',
+        styleUrls: ['./effects.component.css']
     }),
-    __metadata("design:paramtypes", [router_1.Router, typeof (_a = typeof hero_service_1.HeroService !== "undefined" && hero_service_1.HeroService) === "function" && _a || Object])
-], HeroesComponent);
-exports.HeroesComponent = HeroesComponent;
-var _a;
+    __metadata("design:paramtypes", [router_1.Router,
+        effect_service_1.EffectService])
+], EffectsComponent);
+exports.EffectsComponent = EffectsComponent;
 //# sourceMappingURL=effects.component.js.map

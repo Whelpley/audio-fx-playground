@@ -11,14 +11,14 @@ import { EffectService } from './effect.service';
 })
 export class EffectsComponent implements OnInit {
   effects: Effect[];
-  selectedeffect: Effect;
+  selectedEffect: Effect;
 
   constructor(
     private router: Router,
     private effectService: EffectService) { }
 
   getEffects(): void {
-    this.effectService.geteffects().then(effects => this.effects = effects);
+    this.effectService.getEffects().then(effects => this.effects = effects);
   }
 
   ngOnInit(): void {
@@ -30,6 +30,6 @@ export class EffectsComponent implements OnInit {
   }
 
   gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedeffect.id]);
+    this.router.navigate(['/detail', this.selectedEffect.id]);
   }
 }

@@ -5,29 +5,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var mock_heroes_1 = require("./mock-heroes");
+var mock_effects_1 = require("./mock-effects");
 var core_1 = require("@angular/core");
-var HeroService = (function () {
-    function HeroService() {
+var EffectService = (function () {
+    function EffectService() {
     }
-    HeroService.prototype.getHeroes = function () {
-        return Promise.resolve(mock_heroes_1.HEROES);
+    EffectService.prototype.getEffects = function () {
+        return Promise.resolve(mock_effects_1.EFFECTS);
     };
-    HeroService.prototype.getHeroesSlowly = function () {
+    EffectService.prototype.getEffectsSlowly = function () {
         var _this = this;
         return new Promise(function (resolve) {
             // Simulate server latency with 2 second delay
-            setTimeout(function () { return resolve(_this.getHeroes()); }, 2000);
+            setTimeout(function () { return resolve(_this.getEffects()); }, 2000);
         });
     };
-    HeroService.prototype.getHero = function (id) {
-        return this.getHeroes()
-            .then(function (heroes) { return heroes.find(function (hero) { return hero.id === id; }); });
+    EffectService.prototype.getEffect = function (id) {
+        return this.getEffects()
+            .then(function (effects) { return effects.find(function (effect) { return effect.id === id; }); });
     };
-    return HeroService;
+    return EffectService;
 }());
-HeroService = __decorate([
+EffectService = __decorate([
     core_1.Injectable()
-], HeroService);
-exports.HeroService = HeroService;
+], EffectService);
+exports.EffectService = EffectService;
 //# sourceMappingURL=effect.service.js.map

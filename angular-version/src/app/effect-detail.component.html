@@ -1,10 +1,10 @@
-<div *ngIf="hero">
-  <h2>{{hero.name}} details!</h2>
+<div *ngIf="effect">
+  <h2>{{effect.name}} details!</h2>
   <div>
-    <label>id: </label>{{hero.id}}</div>
+    <label>id: </label>{{effect.id}}</div>
   <div>
     <label>name: </label>
-    <input [(ngModel)]="hero.name" placeholder="name" />
+    <input [(ngModel)]="effect.name" placeholder="name" />
   </div>
   <button (click)="goBack()">Back</button>
 </div>
