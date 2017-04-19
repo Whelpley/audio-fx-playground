@@ -8,7 +8,7 @@
 </ul>
 <div *ngIf="selectedEffect">
   <h2>
-    {{selectedEffect.name | uppercase}} is the current sound effect
+    {{selectedEffect.name | uppercase | lowercase}} is the current sound effect
   </h2>
   <button (click)="gotoDetail()">View Details</button>
 </div>
