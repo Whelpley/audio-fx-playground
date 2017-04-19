@@ -1,4 +1,4 @@
-<h2>My effects</h2>
+<h2>Effects menu</h2>
 <ul class="effects">
   <li *ngFor="let effect of effects"
     [class.selected]="effect === selectedeffect"
@@ -8,7 +8,7 @@
 </ul>
 <div *ngIf="selectedEffect">
   <h2>
-    {{selectedEffect.name | uppercase}} is my effect
+    {{selectedEffect.name | uppercase}} is the current sound effect
   </h2>
   <button (click)="gotoDetail()">View Details</button>
 </div>
