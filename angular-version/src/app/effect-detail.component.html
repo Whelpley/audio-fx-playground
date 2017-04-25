@@ -13,7 +13,7 @@
   </div>
   <div>
     <label>Adjust Delay Time: </label>
-    <input type="range" min="0" max="10" [(ngModel)]="effect.delayTime">
+    <input type="range" min="0.01" max="3" step="0.01" [(ngModel)]="effect.delayTime">
   </div>
   <div>
     <label>Delay Regen: </label>
@@ -21,7 +21,7 @@
   </div>
   <div>
     <label>Adjust Delay Regen: </label>
-    <input type="range" min="0" max="10" [(ngModel)]="effect.delayRegen">
+    <input type="range" min="0.01" max="3" step="0.01" [(ngModel)]="effect.delayRegen">
   </div>
   <button (click)="goBack()">Back</button>
 </div>
