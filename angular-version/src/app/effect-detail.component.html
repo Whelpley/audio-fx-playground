@@ -8,8 +8,20 @@
     <input [(ngModel)]="effect.name" placeholder="name" />
   </div>
   <div>
-    <label>Delay Regen Time: </label>
+    <label>Delay Time: </label>
+    {{effect.delayTime}}
+  </div>
+  <div>
+    <label>Adjust Delay Time: </label>
+    <input type="range" min="0" max="10" [(ngModel)]="effect.delayTime">
+  </div>
+  <div>
+    <label>Delay Regen: </label>
     {{effect.delayRegen}}
+  </div>
+  <div>
+    <label>Adjust Delay Regen: </label>
+    <input type="range" min="0" max="10" [(ngModel)]="effect.delayRegen">
   </div>
   <button (click)="goBack()">Back</button>
 </div>
