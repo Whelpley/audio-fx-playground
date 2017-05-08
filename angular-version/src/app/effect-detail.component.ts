@@ -2,9 +2,11 @@ import 'rxjs/add/operator/switchMap';
 import { Component, OnInit }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
+import { isSupported }            from 'angular-audio-context';
 
 import { Effect }         from './effect';
 import { EffectService }  from './effect.service';
+
 @Component({
   selector: 'effect-detail',
   templateUrl: './effect-detail.component.html',
@@ -14,6 +16,7 @@ export class EffectDetailComponent implements OnInit {
   effect: Effect;
 
   constructor(
+    public isSupported: isSupported,
     private effectService: EffectService,
     private route: ActivatedRoute,
     private location: Location

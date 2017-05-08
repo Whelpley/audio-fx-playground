@@ -3,4 +3,5 @@ export class Effect {
   name: string;
   delayTime: number;  
   delayRegen: number;
+  description: string;
 }
