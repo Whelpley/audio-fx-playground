@@ -14,7 +14,9 @@ var router_1 = require("@angular/router");
 var common_1 = require("@angular/common");
 var effect_service_1 = require("./effect.service");
 var EffectDetailComponent = (function () {
-    function EffectDetailComponent(effectService, route, location) {
+    function EffectDetailComponent(
+        // public audioContext: AudioContext,
+        effectService, route, location) {
         this.effectService = effectService;
         this.route = route;
         this.location = location;
